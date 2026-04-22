@@ -1,0 +1,28 @@
+fragment ArtistParts on Artist {
+  __typename
+  name
+  tagline
+  bio
+  location
+  activeSince
+}
+
+fragment ArtworksParts on Artworks {
+  __typename
+  title
+  year
+  medium
+  image
+  dimensions
+  description
+}
+
+fragment ExhibitionsParts on Exhibitions {
+  __typename
+  title
+  venue
+  location
+  startDate
+  endDate
+  description
+}
