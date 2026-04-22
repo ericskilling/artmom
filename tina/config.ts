@@ -50,7 +50,7 @@ export default defineConfig({
             label: "Location",
           },
           {
-            type: "datetime",
+            type: "string",
             name: "activeSince",
             label: "Active Since",
           },
@@ -120,12 +120,12 @@ export default defineConfig({
             label: "Location",
           },
           {
-            type: "datetime",
+            type: "string",
             name: "startDate",
             label: "Start Date",
           },
           {
-            type: "datetime",
+            type: "string",
             name: "endDate",
             label: "End Date",
           },

@@ -226,20 +226,12 @@ export type RichTextFilter = {
   exists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-export type DatetimeFilter = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  eq?: InputMaybe<Scalars['String']['input']>;
-  exists?: InputMaybe<Scalars['Boolean']['input']>;
-  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export type ArtistFilter = {
   name?: InputMaybe<StringFilter>;
   tagline?: InputMaybe<StringFilter>;
   bio?: InputMaybe<RichTextFilter>;
   location?: InputMaybe<StringFilter>;
-  activeSince?: InputMaybe<DatetimeFilter>;
+  activeSince?: InputMaybe<StringFilter>;
 };
 
 export type ArtistConnectionEdges = {
@@ -314,8 +306,8 @@ export type ExhibitionsFilter = {
   title?: InputMaybe<StringFilter>;
   venue?: InputMaybe<StringFilter>;
   location?: InputMaybe<StringFilter>;
-  startDate?: InputMaybe<DatetimeFilter>;
-  endDate?: InputMaybe<DatetimeFilter>;
+  startDate?: InputMaybe<StringFilter>;
+  endDate?: InputMaybe<StringFilter>;
   description?: InputMaybe<RichTextFilter>;
 };
 

@@ -117,20 +117,12 @@ input RichTextFilter {
   exists: Boolean
 }
 
-input DatetimeFilter {
-  after: String
-  before: String
-  eq: String
-  exists: Boolean
-  in: [String]
-}
-
 input ArtistFilter {
   name: StringFilter
   tagline: StringFilter
   bio: RichTextFilter
   location: StringFilter
-  activeSince: DatetimeFilter
+  activeSince: StringFilter
 }
 
 type ArtistConnectionEdges {
@@ -199,8 +191,8 @@ input ExhibitionsFilter {
   title: StringFilter
   venue: StringFilter
   location: StringFilter
-  startDate: DatetimeFilter
-  endDate: DatetimeFilter
+  startDate: StringFilter
+  endDate: StringFilter
   description: RichTextFilter
 }
 
