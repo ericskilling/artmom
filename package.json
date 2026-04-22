@@ -6,9 +6,9 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-    "dev": "PUBLIC_TINA_CLIENT_ID=a8320455-ba98-4570-a11d-3a3eb34db3c8 TINA_TOKEN=23f7ad68a607e635c6a318ae80d99e4a806d170b npx tinacms dev -c \"astro dev --port 3000\"",
+    "dev": "tinacms dev -c \"astro dev\"",
     "build": "astro build",
-    "build:prod": "dotenv -e .env -- npx tinacms build --skip-cloud-checks && astro build",
+    "build:prod": "npx tinacms build --skip-cloud-checks && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -23,7 +23,6 @@
     "@tinacms/cli": "^2.2.2",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
-    "dotenv-cli": "^11.0.0",
     "typescript": "^5.0.0"
   }
 }
