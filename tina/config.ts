@@ -28,6 +28,12 @@ export default defineConfig({
         label: "Artist Information",
         path: "src/content/artist",
         format: "md",
+        ui: {
+          allowedActions: {
+            create: false,
+            delete: false,
+          },
+        },
         fields: [
           {
             type: "string",
@@ -41,9 +47,12 @@ export default defineConfig({
             label: "Tagline",
           },
           {
-            type: "rich-text",
+            type: "string",
             name: "bio",
             label: "Biography",
+            ui: {
+              component: "textarea",
+            },
           },
           {
             type: "string",
@@ -60,6 +69,12 @@ export default defineConfig({
             name: "heroImage",
             label: "Hero Image",
           },
+          {
+            type: "rich-text",
+            name: "body",
+            label: "Body",
+            isBody: true,
+          },
         ],
       },
       {
@@ -67,7 +82,13 @@ export default defineConfig({
         label: "Artworks",
         path: "src/content/artworks",
         format: "md",
-        filename: "{{slug}}",
+        ui: {
+          filename: {
+            slugify: (values) => {
+              return values?.title?.toLowerCase().replace(/ /g, "-");
+            },
+          },
+        },
         fields: [
           {
             type: "string",
@@ -101,9 +122,12 @@ export default defineConfig({
             label: "Featured on Home",
           },
           {
-            type: "rich-text",
+            type: "string",
             name: "description",
             label: "Description",
+            ui: {
+              component: "textarea",
+            },
           },
         ],
       },
@@ -112,7 +136,13 @@ export default defineConfig({
         label: "Exhibitions",
         path: "src/content/exhibitions",
         format: "md",
-        filename: "{{slug}}",
+        ui: {
+          filename: {
+            slugify: (values) => {
+              return values?.title?.toLowerCase().replace(/ /g, "-");
+            },
+          },
+        },
         fields: [
           {
             type: "string",
@@ -146,9 +176,12 @@ export default defineConfig({
             label: "Featured",
           },
           {
-            type: "rich-text",
+            type: "string",
             name: "description",
             label: "Description",
+            ui: {
+              component: "textarea",
+            },
           },
         ],
       },
@@ -157,7 +190,13 @@ export default defineConfig({
         label: "Workshops",
         path: "src/content/workshops",
         format: "md",
-        filename: "{{slug}}",
+        ui: {
+          filename: {
+            slugify: (values) => {
+              return values?.title?.toLowerCase().replace(/ /g, "-");
+            },
+          },
+        },
         fields: [
           {
             type: "string",
@@ -196,9 +235,18 @@ export default defineConfig({
             label: "Past Workshop",
           },
           {
-            type: "rich-text",
+            type: "string",
             name: "description",
             label: "Description",
+            ui: {
+              component: "textarea",
+            },
+          },
+          {
+            type: "rich-text",
+            name: "body",
+            label: "Body",
+            isBody: true,
           },
         ],
       },
@@ -207,7 +255,13 @@ export default defineConfig({
         label: "Comics",
         path: "src/content/comics",
         format: "md",
-        filename: "{{slug}}",
+        ui: {
+          filename: {
+            slugify: (values) => {
+              return values?.title?.toLowerCase().replace(/ /g, "-");
+            },
+          },
+        },
         fields: [
           {
             type: "string",
@@ -236,9 +290,18 @@ export default defineConfig({
             label: "Featured",
           },
           {
-            type: "rich-text",
+            type: "string",
             name: "description",
             label: "Description",
+            ui: {
+              component: "textarea",
+            },
+          },
+          {
+            type: "rich-text",
+            name: "body",
+            label: "Body",
+            isBody: true,
           },
         ],
       },

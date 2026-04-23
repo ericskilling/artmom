@@ -6,6 +6,7 @@ fragment ArtistParts on Artist {
   location
   activeSince
   heroImage
+  body
 }
 
 fragment ArtworksParts on Artworks {
@@ -40,6 +41,7 @@ fragment WorkshopsParts on Workshops {
   registerUrl
   past
   description
+  body
 }
 
 fragment ComicsParts on Comics {
@@ -50,4 +52,5 @@ fragment ComicsParts on Comics {
   image
   featured
   description
+  body
 }

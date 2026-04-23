@@ -241,10 +241,11 @@ export type Artist = Node & Document & {
   __typename?: 'Artist';
   name: Scalars['String']['output'];
   tagline?: Maybe<Scalars['String']['output']>;
-  bio?: Maybe<Scalars['JSON']['output']>;
+  bio?: Maybe<Scalars['String']['output']>;
   location?: Maybe<Scalars['String']['output']>;
   activeSince?: Maybe<Scalars['String']['output']>;
   heroImage?: Maybe<Scalars['String']['output']>;
+  body?: Maybe<Scalars['JSON']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -257,12 +258,6 @@ export type StringFilter = {
   in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-export type RichTextFilter = {
-  startsWith?: InputMaybe<Scalars['String']['input']>;
-  eq?: InputMaybe<Scalars['String']['input']>;
-  exists?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
 export type ImageFilter = {
   startsWith?: InputMaybe<Scalars['String']['input']>;
   eq?: InputMaybe<Scalars['String']['input']>;
@@ -270,13 +265,20 @@ export type ImageFilter = {
   in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
+export type RichTextFilter = {
+  startsWith?: InputMaybe<Scalars['String']['input']>;
+  eq?: InputMaybe<Scalars['String']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 export type ArtistFilter = {
   name?: InputMaybe<StringFilter>;
   tagline?: InputMaybe<StringFilter>;
-  bio?: InputMaybe<RichTextFilter>;
+  bio?: InputMaybe<StringFilter>;
   location?: InputMaybe<StringFilter>;
   activeSince?: InputMaybe<StringFilter>;
   heroImage?: InputMaybe<ImageFilter>;
+  body?: InputMaybe<RichTextFilter>;
 };
 
 export type ArtistConnectionEdges = {
@@ -300,7 +302,7 @@ export type Artworks = Node & Document & {
   image?: Maybe<Scalars['String']['output']>;
   dimensions?: Maybe<Scalars['String']['output']>;
   featured?: Maybe<Scalars['Boolean']['output']>;
-  description?: Maybe<Scalars['JSON']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -318,7 +320,7 @@ export type ArtworksFilter = {
   image?: InputMaybe<ImageFilter>;
   dimensions?: InputMaybe<StringFilter>;
   featured?: InputMaybe<BooleanFilter>;
-  description?: InputMaybe<RichTextFilter>;
+  description?: InputMaybe<StringFilter>;
 };
 
 export type ArtworksConnectionEdges = {
@@ -342,7 +344,7 @@ export type Exhibitions = Node & Document & {
   startDate?: Maybe<Scalars['String']['output']>;
   endDate?: Maybe<Scalars['String']['output']>;
   featured?: Maybe<Scalars['Boolean']['output']>;
-  description?: Maybe<Scalars['JSON']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -355,7 +357,7 @@ export type ExhibitionsFilter = {
   startDate?: InputMaybe<StringFilter>;
   endDate?: InputMaybe<StringFilter>;
   featured?: InputMaybe<BooleanFilter>;
-  description?: InputMaybe<RichTextFilter>;
+  description?: InputMaybe<StringFilter>;
 };
 
 export type ExhibitionsConnectionEdges = {
@@ -380,7 +382,8 @@ export type Workshops = Node & Document & {
   time?: Maybe<Scalars['String']['output']>;
   registerUrl?: Maybe<Scalars['String']['output']>;
   past?: Maybe<Scalars['Boolean']['output']>;
-  description?: Maybe<Scalars['JSON']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  body?: Maybe<Scalars['JSON']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -394,7 +397,8 @@ export type WorkshopsFilter = {
   time?: InputMaybe<StringFilter>;
   registerUrl?: InputMaybe<StringFilter>;
   past?: InputMaybe<BooleanFilter>;
-  description?: InputMaybe<RichTextFilter>;
+  description?: InputMaybe<StringFilter>;
+  body?: InputMaybe<RichTextFilter>;
 };
 
 export type WorkshopsConnectionEdges = {
@@ -417,7 +421,8 @@ export type Comics = Node & Document & {
   format?: Maybe<Scalars['String']['output']>;
   image?: Maybe<Scalars['String']['output']>;
   featured?: Maybe<Scalars['Boolean']['output']>;
-  description?: Maybe<Scalars['JSON']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  body?: Maybe<Scalars['JSON']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -429,7 +434,8 @@ export type ComicsFilter = {
   format?: InputMaybe<StringFilter>;
   image?: InputMaybe<ImageFilter>;
   featured?: InputMaybe<BooleanFilter>;
-  description?: InputMaybe<RichTextFilter>;
+  description?: InputMaybe<StringFilter>;
+  body?: InputMaybe<RichTextFilter>;
 };
 
 export type ComicsConnectionEdges = {
@@ -577,10 +583,11 @@ export type DocumentMutation = {
 export type ArtistMutation = {
   name?: InputMaybe<Scalars['String']['input']>;
   tagline?: InputMaybe<Scalars['String']['input']>;
-  bio?: InputMaybe<Scalars['JSON']['input']>;
+  bio?: InputMaybe<Scalars['String']['input']>;
   location?: InputMaybe<Scalars['String']['input']>;
   activeSince?: InputMaybe<Scalars['String']['input']>;
   heroImage?: InputMaybe<Scalars['String']['input']>;
+  body?: InputMaybe<Scalars['JSON']['input']>;
 };
 
 export type ArtworksMutation = {
@@ -590,7 +597,7 @@ export type ArtworksMutation = {
   image?: InputMaybe<Scalars['String']['input']>;
   dimensions?: InputMaybe<Scalars['String']['input']>;
   featured?: InputMaybe<Scalars['Boolean']['input']>;
-  description?: InputMaybe<Scalars['JSON']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ExhibitionsMutation = {
@@ -600,7 +607,7 @@ export type ExhibitionsMutation = {
   startDate?: InputMaybe<Scalars['String']['input']>;
   endDate?: InputMaybe<Scalars['String']['input']>;
   featured?: InputMaybe<Scalars['Boolean']['input']>;
-  description?: InputMaybe<Scalars['JSON']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type WorkshopsMutation = {
@@ -611,7 +618,8 @@ export type WorkshopsMutation = {
   time?: InputMaybe<Scalars['String']['input']>;
   registerUrl?: InputMaybe<Scalars['String']['input']>;
   past?: InputMaybe<Scalars['Boolean']['input']>;
-  description?: InputMaybe<Scalars['JSON']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  body?: InputMaybe<Scalars['JSON']['input']>;
 };
 
 export type ComicsMutation = {
@@ -620,25 +628,26 @@ export type ComicsMutation = {
   format?: InputMaybe<Scalars['String']['input']>;
   image?: InputMaybe<Scalars['String']['input']>;
   featured?: InputMaybe<Scalars['Boolean']['input']>;
-  description?: InputMaybe<Scalars['JSON']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  body?: InputMaybe<Scalars['JSON']['input']>;
 };
 
-export type ArtistPartsFragment = { __typename: 'Artist', name: string, tagline?: string | null, bio?: any | null, location?: string | null, activeSince?: string | null, heroImage?: string | null };
+export type ArtistPartsFragment = { __typename: 'Artist', name: string, tagline?: string | null, bio?: string | null, location?: string | null, activeSince?: string | null, heroImage?: string | null, body?: any | null };
 
-export type ArtworksPartsFragment = { __typename: 'Artworks', title: string, year?: string | null, medium?: string | null, image?: string | null, dimensions?: string | null, featured?: boolean | null, description?: any | null };
+export type ArtworksPartsFragment = { __typename: 'Artworks', title: string, year?: string | null, medium?: string | null, image?: string | null, dimensions?: string | null, featured?: boolean | null, description?: string | null };
 
-export type ExhibitionsPartsFragment = { __typename: 'Exhibitions', title: string, venue?: string | null, location?: string | null, startDate?: string | null, endDate?: string | null, featured?: boolean | null, description?: any | null };
+export type ExhibitionsPartsFragment = { __typename: 'Exhibitions', title: string, venue?: string | null, location?: string | null, startDate?: string | null, endDate?: string | null, featured?: boolean | null, description?: string | null };
 
-export type WorkshopsPartsFragment = { __typename: 'Workshops', title: string, organization?: string | null, location?: string | null, date?: string | null, time?: string | null, registerUrl?: string | null, past?: boolean | null, description?: any | null };
+export type WorkshopsPartsFragment = { __typename: 'Workshops', title: string, organization?: string | null, location?: string | null, date?: string | null, time?: string | null, registerUrl?: string | null, past?: boolean | null, description?: string | null, body?: any | null };
 
-export type ComicsPartsFragment = { __typename: 'Comics', title: string, year?: string | null, format?: string | null, image?: string | null, featured?: boolean | null, description?: any | null };
+export type ComicsPartsFragment = { __typename: 'Comics', title: string, year?: string | null, format?: string | null, image?: string | null, featured?: boolean | null, description?: string | null, body?: any | null };
 
 export type ArtistQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type ArtistQuery = { __typename?: 'Query', artist: { __typename: 'Artist', id: string, name: string, tagline?: string | null, bio?: any | null, location?: string | null, activeSince?: string | null, heroImage?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type ArtistQuery = { __typename?: 'Query', artist: { __typename: 'Artist', id: string, name: string, tagline?: string | null, bio?: string | null, location?: string | null, activeSince?: string | null, heroImage?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type ArtistConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -650,14 +659,14 @@ export type ArtistConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ArtistConnectionQuery = { __typename?: 'Query', artistConnection: { __typename?: 'ArtistConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ArtistConnectionEdges', cursor: string, node?: { __typename: 'Artist', id: string, name: string, tagline?: string | null, bio?: any | null, location?: string | null, activeSince?: string | null, heroImage?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type ArtistConnectionQuery = { __typename?: 'Query', artistConnection: { __typename?: 'ArtistConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ArtistConnectionEdges', cursor: string, node?: { __typename: 'Artist', id: string, name: string, tagline?: string | null, bio?: string | null, location?: string | null, activeSince?: string | null, heroImage?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type ArtworksQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type ArtworksQuery = { __typename?: 'Query', artworks: { __typename: 'Artworks', id: string, title: string, year?: string | null, medium?: string | null, image?: string | null, dimensions?: string | null, featured?: boolean | null, description?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type ArtworksQuery = { __typename?: 'Query', artworks: { __typename: 'Artworks', id: string, title: string, year?: string | null, medium?: string | null, image?: string | null, dimensions?: string | null, featured?: boolean | null, description?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type ArtworksConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -669,14 +678,14 @@ export type ArtworksConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ArtworksConnectionQuery = { __typename?: 'Query', artworksConnection: { __typename?: 'ArtworksConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ArtworksConnectionEdges', cursor: string, node?: { __typename: 'Artworks', id: string, title: string, year?: string | null, medium?: string | null, image?: string | null, dimensions?: string | null, featured?: boolean | null, description?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type ArtworksConnectionQuery = { __typename?: 'Query', artworksConnection: { __typename?: 'ArtworksConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ArtworksConnectionEdges', cursor: string, node?: { __typename: 'Artworks', id: string, title: string, year?: string | null, medium?: string | null, image?: string | null, dimensions?: string | null, featured?: boolean | null, description?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type ExhibitionsQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type ExhibitionsQuery = { __typename?: 'Query', exhibitions: { __typename: 'Exhibitions', id: string, title: string, venue?: string | null, location?: string | null, startDate?: string | null, endDate?: string | null, featured?: boolean | null, description?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type ExhibitionsQuery = { __typename?: 'Query', exhibitions: { __typename: 'Exhibitions', id: string, title: string, venue?: string | null, location?: string | null, startDate?: string | null, endDate?: string | null, featured?: boolean | null, description?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type ExhibitionsConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -688,14 +697,14 @@ export type ExhibitionsConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ExhibitionsConnectionQuery = { __typename?: 'Query', exhibitionsConnection: { __typename?: 'ExhibitionsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ExhibitionsConnectionEdges', cursor: string, node?: { __typename: 'Exhibitions', id: string, title: string, venue?: string | null, location?: string | null, startDate?: string | null, endDate?: string | null, featured?: boolean | null, description?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type ExhibitionsConnectionQuery = { __typename?: 'Query', exhibitionsConnection: { __typename?: 'ExhibitionsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ExhibitionsConnectionEdges', cursor: string, node?: { __typename: 'Exhibitions', id: string, title: string, venue?: string | null, location?: string | null, startDate?: string | null, endDate?: string | null, featured?: boolean | null, description?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type WorkshopsQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type WorkshopsQuery = { __typename?: 'Query', workshops: { __typename: 'Workshops', id: string, title: string, organization?: string | null, location?: string | null, date?: string | null, time?: string | null, registerUrl?: string | null, past?: boolean | null, description?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type WorkshopsQuery = { __typename?: 'Query', workshops: { __typename: 'Workshops', id: string, title: string, organization?: string | null, location?: string | null, date?: string | null, time?: string | null, registerUrl?: string | null, past?: boolean | null, description?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type WorkshopsConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -707,14 +716,14 @@ export type WorkshopsConnectionQueryVariables = Exact<{
 }>;
 
 
-export type WorkshopsConnectionQuery = { __typename?: 'Query', workshopsConnection: { __typename?: 'WorkshopsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'WorkshopsConnectionEdges', cursor: string, node?: { __typename: 'Workshops', id: string, title: string, organization?: string | null, location?: string | null, date?: string | null, time?: string | null, registerUrl?: string | null, past?: boolean | null, description?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type WorkshopsConnectionQuery = { __typename?: 'Query', workshopsConnection: { __typename?: 'WorkshopsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'WorkshopsConnectionEdges', cursor: string, node?: { __typename: 'Workshops', id: string, title: string, organization?: string | null, location?: string | null, date?: string | null, time?: string | null, registerUrl?: string | null, past?: boolean | null, description?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type ComicsQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type ComicsQuery = { __typename?: 'Query', comics: { __typename: 'Comics', id: string, title: string, year?: string | null, format?: string | null, image?: string | null, featured?: boolean | null, description?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type ComicsQuery = { __typename?: 'Query', comics: { __typename: 'Comics', id: string, title: string, year?: string | null, format?: string | null, image?: string | null, featured?: boolean | null, description?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type ComicsConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -726,7 +735,7 @@ export type ComicsConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ComicsConnectionQuery = { __typename?: 'Query', comicsConnection: { __typename?: 'ComicsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ComicsConnectionEdges', cursor: string, node?: { __typename: 'Comics', id: string, title: string, year?: string | null, format?: string | null, image?: string | null, featured?: boolean | null, description?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type ComicsConnectionQuery = { __typename?: 'Query', comicsConnection: { __typename?: 'ComicsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ComicsConnectionEdges', cursor: string, node?: { __typename: 'Comics', id: string, title: string, year?: string | null, format?: string | null, image?: string | null, featured?: boolean | null, description?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export const ArtistPartsFragmentDoc = gql`
     fragment ArtistParts on Artist {
@@ -737,6 +746,7 @@ export const ArtistPartsFragmentDoc = gql`
   location
   activeSince
   heroImage
+  body
 }
     `;
 export const ArtworksPartsFragmentDoc = gql`
@@ -774,6 +784,7 @@ export const WorkshopsPartsFragmentDoc = gql`
   registerUrl
   past
   description
+  body
 }
     `;
 export const ComicsPartsFragmentDoc = gql`
@@ -785,6 +796,7 @@ export const ComicsPartsFragmentDoc = gql`
   image
   featured
   description
+  body
 }
     `;
 export const ArtistDocument = gql`
