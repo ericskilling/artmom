@@ -159,7 +159,6 @@ body::after {
     linear-gradient(185deg, transparent 40%, rgba(255, 20, 147, 0.1) 40%, rgba(255, 20, 147, 0.1) 43%, transparent 43%) 80% 88% / 180px 100px no-repeat,
     linear-gradient(15deg, transparent 38%, rgba(223, 255, 0, 0.09) 38%, rgba(223, 255, 0, 0.09) 41%, transparent 41%) 90% 86% / 220px 95px no-repeat;
 }
-}
 
 /* Ensure sections have solid backgrounds to cover lines */
 section {
@@ -168,7 +167,6 @@ section {
   background-color: #ffffff;
   z-index: 1;
   isolation: isolate;
-}
 }
 
 /* ============================================
@@ -1999,7 +1997,6 @@ section:nth-child(even) .details dd {
     clip-path: none;
     margin-left: 0;
     margin-right: 0;
-  }
 }
 
 /* ============================================
