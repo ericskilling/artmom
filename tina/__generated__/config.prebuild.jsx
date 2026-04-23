@@ -47,7 +47,12 @@ var config_default = defineConfig({
           {
             type: "string",
             name: "activeSince",
-            label: "Active Since"
+            label: "Making Art Since"
+          },
+          {
+            type: "image",
+            name: "heroImage",
+            label: "Hero Image"
           }
         ]
       },
@@ -83,6 +88,11 @@ var config_default = defineConfig({
             type: "string",
             name: "dimensions",
             label: "Dimensions"
+          },
+          {
+            type: "boolean",
+            name: "featured",
+            label: "Featured on Home"
           },
           {
             type: "rich-text",
@@ -123,6 +133,101 @@ var config_default = defineConfig({
             type: "string",
             name: "endDate",
             label: "End Date"
+          },
+          {
+            type: "boolean",
+            name: "featured",
+            label: "Featured"
+          },
+          {
+            type: "rich-text",
+            name: "description",
+            label: "Description"
+          }
+        ]
+      },
+      {
+        name: "workshops",
+        label: "Workshops",
+        path: "src/content/workshops",
+        format: "md",
+        filename: "{{slug}}",
+        fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Workshop Title",
+            required: true
+          },
+          {
+            type: "string",
+            name: "organization",
+            label: "Organization"
+          },
+          {
+            type: "string",
+            name: "location",
+            label: "Location"
+          },
+          {
+            type: "string",
+            name: "date",
+            label: "Date"
+          },
+          {
+            type: "string",
+            name: "time",
+            label: "Time"
+          },
+          {
+            type: "string",
+            name: "registerUrl",
+            label: "Registration URL"
+          },
+          {
+            type: "boolean",
+            name: "past",
+            label: "Past Workshop"
+          },
+          {
+            type: "rich-text",
+            name: "description",
+            label: "Description"
+          }
+        ]
+      },
+      {
+        name: "comics",
+        label: "Comics",
+        path: "src/content/comics",
+        format: "md",
+        filename: "{{slug}}",
+        fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Title",
+            required: true
+          },
+          {
+            type: "string",
+            name: "year",
+            label: "Year"
+          },
+          {
+            type: "string",
+            name: "format",
+            label: "Format"
+          },
+          {
+            type: "image",
+            name: "image",
+            label: "Image"
+          },
+          {
+            type: "boolean",
+            name: "featured",
+            label: "Featured"
           },
           {
             type: "rich-text",

@@ -162,3 +162,113 @@ query exhibitionsConnection($before: String, $after: String, $first: Float, $las
     }
   }
 }
+
+query workshops($relativePath: String!) {
+  workshops(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...WorkshopsParts
+  }
+}
+
+query workshopsConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: WorkshopsFilter) {
+  workshopsConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...WorkshopsParts
+      }
+    }
+  }
+}
+
+query comics($relativePath: String!) {
+  comics(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...ComicsParts
+  }
+}
+
+query comicsConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: ComicsFilter) {
+  comicsConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...ComicsParts
+      }
+    }
+  }
+}

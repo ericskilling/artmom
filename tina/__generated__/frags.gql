@@ -5,6 +5,7 @@ fragment ArtistParts on Artist {
   bio
   location
   activeSince
+  heroImage
 }
 
 fragment ArtworksParts on Artworks {
@@ -14,6 +15,7 @@ fragment ArtworksParts on Artworks {
   medium
   image
   dimensions
+  featured
   description
 }
 
@@ -24,5 +26,28 @@ fragment ExhibitionsParts on Exhibitions {
   location
   startDate
   endDate
+  featured
+  description
+}
+
+fragment WorkshopsParts on Workshops {
+  __typename
+  title
+  organization
+  location
+  date
+  time
+  registerUrl
+  past
+  description
+}
+
+fragment ComicsParts on Comics {
+  __typename
+  title
+  year
+  format
+  image
+  featured
   description
 }
