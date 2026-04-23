@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const comics = await getCollection('comics');
+const sortedComics = comics.sort((a, b) => parseInt(b.data.year) - parseInt(a.data.year));
+---
+
+<BaseLayout title="Comics - Rachelle Ymay Skilling" description="Graphic stories and comics by Rachelle Ymay Skilling">
+  <main>
+    <section>
+      <h3>Comics & Graphic Stories</h3>
+      <div class="comics-grid">
+        {comics.map((comic, index) => (
+          <article class={`comic-card comic-card-${index + 1}`}>
+            <div class="card-accent-top"></div>
+            {comic.data.image ? (
+              <div class="comic-image-wrap">
+                <img src={comic.data.image} alt={comic.data.title} />
+              </div>
+            ) : (
+              <div class="comic-placeholder">
+                <div class="placeholder-pattern"></div>
+              </div>
+            )}
+            <div class="card-content">
+              <h4>{comic.data.title}</h4>
+              <p class="comic-year">{comic.data.year}</p>
+              <p class="comic-format">{comic.data.format}</p>
+              {comic.data.description && (
+                <p class="comic-description">{comic.data.description}</p>
+              )}
+            </div>
+            <div class="card-accent-bottom"></div>
+          </article>
+        ))}
+      </div>
+    </section>
+  </main>
+</BaseLayout>

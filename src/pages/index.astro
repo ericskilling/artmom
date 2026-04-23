@@ -1,288 +1,166 @@
 ---
 import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
 
 const artworks = await getCollection('artworks');
 const exhibitions = await getCollection('exhibitions');
+const comics = await getCollection('comics');
+const workshops = await getCollection('workshops');
+const artist = await getCollection('artist');
+const artistInfo = artist[0]?.data || {};
 
-const about = await getCollection('artist');
-const artistInfo = about[0]?.data || {};
-
-const sortedArtworks = artworks.sort((a, b) => parseInt(b.data.year) - parseInt(a.data.year));
+const sortedArtworks = artworks.sort((a, b) => parseInt(b.data.year) - parseInt(a.data.year)).slice(0, 3);
+const sortedExhibitions = exhibitions.sort((a, b) => new Date(b.data.startDate).getTime() - new Date(a.data.startDate).getTime()).slice(0, 3);
+const featuredComics = comics.filter(c => c.data.featured);
+const upcomingWorkshops = workshops.filter(w => !w.data.past).sort((a, b) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime());
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{artistInfo.name || 'Rachelle Ymay Skilling'} - Artist</title>
-    <meta name="description" content={artistInfo.tagline || "Contemporary Artist from Calgary, Alberta"} />
-  </head>
-  <body>
-    <header>
-      <nav>
-        <h1>{artistInfo.name || 'Rachelle Ymay Skilling'}</h1>
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="/portfolio">Portfolio</a></li>
-          <li><a href="/exhibitions">Exhibitions</a></li>
-        </ul>
-      </nav>
-    </header>
+<BaseLayout title="Rachelle Ymay Skilling - Contemporary Artist" description={artistInfo.tagline || "Contemporary Artist from Calgary, Alberta"}>
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <h2><span>{artistInfo.tagline || 'Contemporary Artist'}</span> Calgary, Alberta</h2>
+        <p class="tagline">Bold. Geometric. Autobiographical.</p>
+        <p class="bio-preview">{artistInfo.bio}</p>
+        
+        {artistInfo.heroImage && (
+          <div class="hero-artwork">
+            <img src={artistInfo.heroImage} alt="Rachelle Ymay Skilling" />
+          </div>
+        )}
+      </div>
+    </section>
 
-    <main>
-      <section class="hero">
-        <h2>{artistInfo.tagline || 'Contemporary Artist'}</h2>
-        <p class="bio-preview">{artistInfo.bio?.slice(0, 200)}...</p>
-      </section>
+    <div class="section-divider"></div>
 
-      <section class="artworks">
-        <h3>Recent Works</h3>
-        <div class="artwork-grid">
-          {sortedArtworks.slice(0, 4).map((artwork) => (
-            <article class="artwork-card">
-              <h4>{artwork.data.title}</h4>
-              <p class="artwork-year">{artwork.data.year}</p>
-              <p class="artwork-medium">{artwork.data.medium}</p>
-              {artwork.data.dimensions && (
-                <p class="artwork-dimensions">{artwork.data.dimensions}</p>
-              )}
-              {artwork.data.description && (
-                <p class="artwork-description">{artwork.data.description}</p>
+    <section id="about">
+      <h3>About</h3>
+      <div class="profile">
+        <h3>{artistInfo.name}</h3>
+        <p class="tagline">{artistInfo.tagline}</p>
+        <div class="bio">
+          <p>{artistInfo.bio}</p>
+        </div>
+        <dl class="details">
+          <dt>Location</dt>
+          <dd>{artistInfo.location}</dd>
+          {artistInfo.activeSince && (
+            <>
+              <dt>Making Art Since</dt>
+              <dd>{artistInfo.activeSince}</dd>
+            </>
+          )}
+        </dl>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section id="workshops">
+      <h3>AUArts Class</h3>
+      {upcomingWorkshops.length > 0 ? (
+        <div class="workshop-list">
+          {upcomingWorkshops.map((workshop) => (
+            <article class="workshop-item">
+              <h4>{workshop.data.title}</h4>
+              <p class="workshop-org">{workshop.data.organization}</p>
+              <p class="workshop-date">{new Date(workshop.data.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+              {workshop.data.time && <p class="workshop-time">{workshop.data.time}</p>}
+              {workshop.data.description && <p class="workshop-description">{workshop.data.description}</p>}
+              {workshop.data.registerUrl && (
+                <a href={workshop.data.registerUrl} class="btn" target="_blank">Register</a>
               )}
             </article>
           ))}
         </div>
-        <a href="/portfolio" class="view-all">View All Works</a>
-      </section>
+      ) : (
+        <p>No upcoming workshops at this time.</p>
+      )}
+    </section>
 
-      <section class="exhibitions">
-        <h3>Upcoming & Recent Exhibitions</h3>
-        <ul class="exhibition-list">
-          {exhibitions.slice(0, 3).map((exhibition) => (
-            <li class="exhibition-item">
-              <h4>{exhibition.data.title}</h4>
-              <p>{exhibition.data.venue} - {exhibition.data.location}</p>
-              <p class="exhibition-date">
-                {new Date(exhibition.data.startDate).toLocaleDateString()} -
-                {new Date(exhibition.data.endDate).toLocaleDateString()}
-              </p>
-            </li>
-          ))}
-        </ul>
+    <div class="section-divider"></div>
+
+    <section id="portfolio">
+      <h3>Recent Work</h3>
+      <div class="artwork-grid">
+        {sortedArtworks.map((artwork, index) => (
+          <article class={`artwork-card artwork-card-${index + 1}`}>
+            <div class="card-accent-top"></div>
+            {artwork.data.image ? (
+              <div class="artwork-image-wrap">
+                <img src={artwork.data.image} alt={artwork.data.title} />
+              </div>
+            ) : (
+              <div class="artwork-image-wrap artwork-placeholder">
+                <div class="placeholder-pattern"></div>
+              </div>
+            )}
+            <div class="card-content">
+              <h4>{artwork.data.title}</h4>
+              <p class="artwork-year">{artwork.data.year}</p>
+              <p class="artwork-medium">{artwork.data.medium}</p>
+            </div>
+            <div class="card-accent-bottom"></div>
+          </article>
+        ))}
+      </div>
+      <div style="text-align: center; margin-top: 3rem;">
+        <a href="/art" class="view-all">View Full Portfolio</a>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section id="comics">
+      <h3>Comics</h3>
+      <div class="artwork-grid">
+        {featuredComics.map((comic, index) => (
+          <article class={`artwork-card artwork-card-${index + 1}`}>
+            <div class="card-accent-top"></div>
+            {comic.data.image ? (
+              <div class="artwork-image-wrap">
+                <img src={comic.data.image} alt={comic.data.title} />
+              </div>
+            ) : (
+              <div class="artwork-image-wrap artwork-placeholder">
+                <div class="placeholder-pattern"></div>
+              </div>
+            )}
+            <div class="card-content">
+              <h4>{comic.data.title}</h4>
+              <p class="artwork-year">{comic.data.year}</p>
+              <p class="artwork-medium">{comic.data.format}</p>
+            </div>
+            <div class="card-accent-bottom"></div>
+          </article>
+        ))}
+      </div>
+      <div style="text-align: center; margin-top: 3rem;">
+        <a href="/comics" class="view-all">View All Comics</a>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section id="exhibitions">
+      <h3>Exhibitions</h3>
+      <ul class="exhibition-list">
+        {sortedExhibitions.map((exhibition) => (
+          <li class="exhibition-item">
+            <h4>{exhibition.data.title}</h4>
+            <p class="exhibition-venue">
+              <span class="venue">{exhibition.data.venue}</span>
+              {exhibition.data.location && <span class="location">, {exhibition.data.location}</span>}
+            </p>
+            <p class="exhibition-date">
+              {new Date(exhibition.data.startDate).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+            </p>
+          </li>
+        ))}
+      </ul>
+      <div style="text-align: center; margin-top: 3rem;">
         <a href="/exhibitions" class="view-all">View All Exhibitions</a>
-      </section>
-    </main>
-
-    <footer>
-      <p>&copy; {new Date().getFullYear()} {artistInfo.name || 'Rachelle Ymay Skilling'}. All rights reserved.</p>
-      <p>Based in {artistInfo.location || 'Calgary, Alberta'}</p>
-    </footer>
-  </body>
-</html>
-
-<style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background: #fafafa;
-  }
-
-  header {
-    padding: 2rem;
-    background: #fff;
-    border-bottom: 1px solid #eee;
-  }
-
-  nav {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-  nav h1 {
-    font-size: 1.5rem;
-    font-weight: 600;
-  }
-
-  nav ul {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-  }
-
-  nav a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-  }
-
-  nav a:hover {
-    color: #666;
-  }
-
-  main {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 3rem 2rem;
-  }
-
-  .hero {
-    text-align: center;
-    padding: 4rem 0;
-    border-bottom: 1px solid #eee;
-    margin-bottom: 4rem;
-  }
-
-  .hero h2 {
-    font-size: 2rem;
-    font-weight: 400;
-    margin-bottom: 1rem;
-  }
-
-  .bio-preview {
-    max-width: 600px;
-    margin: 0 auto;
-    color: #666;
-  }
-
-  section {
-    margin-bottom: 4rem;
-  }
-
-  section h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 2rem;
-    text-align: center;
-  }
-
-  .artwork-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
-  }
-
-  .artwork-card {
-    background: #fff;
-    padding: 1.5rem;
-    border: 1px solid #eee;
-    border-radius: 8px;
-  }
-
-  .artwork-card h4 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-  }
-
-  .artwork-year {
-    color: #666;
-    font-size: 0.9rem;
-  }
-
-  .artwork-medium {
-    color: #888;
-    font-size: 0.85rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .artwork-dimensions {
-    color: #888;
-    font-size: 0.85rem;
-    font-style: italic;
-    margin-bottom: 0.5rem;
-  }
-
-  .artwork-description {
-    font-size: 0.9rem;
-    color: #555;
-    margin-top: 1rem;
-  }
-
-  .exhibition-list {
-    list-style: none;
-    max-width: 600px;
-    margin: 0 auto 2rem;
-  }
-
-  .exhibition-item {
-    padding: 1.5rem;
-    background: #fff;
-    border: 1px solid #eee;
-    border-radius: 8px;
-    margin-bottom: 1rem;
-  }
-
-  .exhibition-item h4 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-  }
-
-  .exhibition-date {
-    color: #666;
-    font-size: 0.9rem;
-    margin-top: 0.5rem;
-  }
-
-  .view-all {
-    display: block;
-    text-align: center;
-    padding: 0.75rem 2rem;
-    background: #333;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 4px;
-    max-width: 200px;
-    margin: 0 auto;
-  }
-
-  .view-all:hover {
-    background: #555;
-  }
-
-  footer {
-    text-align: center;
-    padding: 2rem;
-    background: #fff;
-    border-top: 1px solid #eee;
-    color: #666;
-    font-size: 0.9rem;
-  }
-
-  footer p {
-    margin-bottom: 0.5rem;
-  }
-
-  @media (max-width: 768px) {
-    nav {
-      flex-direction: column;
-      text-align: center;
-    }
-
-    nav ul {
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-    }
-
-    .hero h2 {
-      font-size: 1.5rem;
-    }
-  }
-</style>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

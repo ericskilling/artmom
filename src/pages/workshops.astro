@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const workshops = await getCollection('workshops');
+const upcoming = workshops.filter(w => !w.data.past).sort((a, b) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime());
+const past = workshops.filter(w => w.data.past);
+---
+
+<BaseLayout title="Workshops - Rachelle Ymay Skilling" description="Comics workshops and classes by Rachelle Ymay Skilling">
+  <main>
+    <section>
+      <h3>Workshops & Classes</h3>
+      
+      {upcoming.length > 0 && (
+        <div class="workshop-list">
+          <h4>Upcoming</h4>
+          {upcoming.map((workshop) => (
+            <article class="workshop-item">
+              <h5>{workshop.data.title}</h5>
+              <p class="workshop-org">{workshop.data.organization}</p>
+              <p class="workshop-date">{new Date(workshop.data.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+              {workshop.data.time && <p class="workshop-time">{workshop.data.time}</p>}
+              {workshop.data.description && <p class="workshop-description">{workshop.data.description}</p>}
+              {workshop.data.registerUrl && (
+                <a href={workshop.data.registerUrl} class="btn" target="_blank">Register</a>
+              )}
+            </article>
+          ))}
+        </div>
+      )}
+      
+      {past.length > 0 && (
+        <div class="workshop-list">
+          <h4>Past Workshops</h4>
+          {past.map((workshop) => (
+            <article class="workshop-item past">
+              <h5>{workshop.data.title}</h5>
+              <p class="workshop-org">{workshop.data.organization}</p>
+              <p class="workshop-date">{new Date(workshop.data.date).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</p>
+              {workshop.data.description && <p class="workshop-description">{workshop.data.description}</p>}
+            </article>
+          ))}
+        </div>
+      )}
+    </section>
+  </main>
+</BaseLayout>

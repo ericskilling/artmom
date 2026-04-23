@@ -1,8 +1,13 @@
 ---
 name: Rachelle Ymay Skilling
-tagline: 'Contemporary Artist from Calgary, Alberta'
+tagline: Bold. Geometric. Autobiographical.
 bio: |
-  Rachelle Ymay Skilling is a contemporary artist working primarily in acrylics and mixed media. Based in Calgary, Alberta, her work explores themes of nature, memory, and the human connection to the environment. Since formally beginning her artistic journey in 2018, Rachelle has participated in numerous exhibitions and community art projects throughout Southern Alberta and Canada.
-location: 'Calgary, Alberta, Canada'
-activeSince: '2018-01-01T00:00:00.000Z'
+  Rachelle Ymay Skilling is a Calgary-based artist and juried member of the Alberta Society of Artists. Her work explores themes of motherhood, personal narrative, and the everyday moments that define our lives. Inspired by her Dutch heritage, her bold geometric paintings and drawings capture the chaos and joy of modern motherhood.
+  
+  She teaches Autobiographical Comics at Alberta University of the Arts (AUArts) and has been featured in New Forum Magazine and Mutha Magazine.
+location: Calgary, Alberta
+activeSince: "2003"
+heroImage: /images/Skilling-Rachelle-Ymay_Golden.jpg
 ---
+
+Rachelle Ymay Skilling is a Calgary-based artist and juried member of the Alberta Society of Artists. Her work explores themes of motherhood, personal narrative, and the everyday moments that define our lives.
