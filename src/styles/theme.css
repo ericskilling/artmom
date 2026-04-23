@@ -1990,13 +1990,14 @@ section:nth-child(even) .details dd {
     clip-path: none;
   }
 
-  header,
+header,
   footer,
   .section-divider {
     transform: rotate(0deg);
     clip-path: none;
     margin-left: 0;
     margin-right: 0;
+  }
 }
 
 /* ============================================
