@@ -96,8 +96,6 @@ export default defineConfig({
   }),
   build: {
     assets: '_assets',
-    client: 'dist',
-    server: 'dist',
   },
   build: {
     assets: '_assets',
