@@ -11,10 +11,9 @@ export default defineConfig({
     sveltia({
       config: {
         backend: {
-          name: 'github',
-          repo: 'ericskilling/artmom',
-          branch: 'main',
+          name: 'local', // Use local filesystem for development
         },
+        local_deployment: true,
         media_folder: 'public/images',
         public_folder: '/images',
         collections: [
