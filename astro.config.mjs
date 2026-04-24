@@ -94,8 +94,6 @@ export default defineConfig({
   output: 'server', // Required for Sveltia CMS admin UI
   adapter: cloudflare(),
   build: {
-    format: 'directory',
-    directory: 'dist',
     assets: '_assets',
   },
 });
