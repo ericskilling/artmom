@@ -92,7 +92,12 @@ export default defineConfig({
     }),
   ],
   output: 'server', // Required for Sveltia CMS admin UI
-  adapter: cloudflare(),
+  adapter: cloudflare({
+    imageService: 'cloudflare',
+    routes: {
+      exclude: ['/admin/*'],
+    },
+  }),
   build: {
     assets: '_assets',
   },
