@@ -91,10 +91,15 @@ export default defineConfig({
       },
     }),
   ],
-  output: 'static', // Static output with Sveltia CMS admin
+  output: 'static',
   adapter: cloudflare({
     imageService: 'cloudflare',
   }),
+  build: {
+    assets: '_assets',
+    client: 'dist',
+    server: 'dist',
+  },
   build: {
     assets: '_assets',
   },
