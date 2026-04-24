@@ -6,7 +6,7 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-    "dev": "tinacms dev -c \"astro dev\"",
+    "dev": "dotenv tinacms dev -c \"astro dev --port 3000\"",
     "build": "astro build",
     "build:prod": "npx tinacms build --skip-cloud-checks && astro build",
     "preview": "astro preview",
@@ -23,6 +23,7 @@
     "@tinacms/cli": "^2.2.2",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "dotenv-cli": "^11.0.0",
     "typescript": "^5.0.0"
   }
 }

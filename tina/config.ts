@@ -11,6 +11,7 @@ export default defineConfig({
   branch,
   clientId: process.env.PUBLIC_TINA_CLIENT_ID,
   token: process.env.TINA_TOKEN,
+  client: { skip: true }, // <--- Add this line here
   build: {
     outputFolder: "admin",
     publicFolder: "public",

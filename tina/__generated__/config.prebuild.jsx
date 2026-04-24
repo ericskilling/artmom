@@ -5,6 +5,8 @@ var config_default = defineConfig({
   branch,
   clientId: process.env.PUBLIC_TINA_CLIENT_ID,
   token: process.env.TINA_TOKEN,
+  client: { skip: true },
+  // <--- Add this line here
   build: {
     outputFolder: "admin",
     publicFolder: "public"
@@ -56,7 +58,9 @@ var config_default = defineConfig({
           {
             type: "string",
             name: "activeSince",
-            label: "Making Art Since"
+            label: "Making Art Since",
+            description: "e.g., 1998"
+            // Added to nudge the indexer
           },
           {
             type: "image",
