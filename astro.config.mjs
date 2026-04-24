@@ -91,12 +91,9 @@ export default defineConfig({
       },
     }),
   ],
-  output: 'server', // Required for Sveltia CMS admin UI
+  output: 'static', // Static output with Sveltia CMS admin
   adapter: cloudflare({
     imageService: 'cloudflare',
-    routes: {
-      exclude: ['/admin/*'],
-    },
   }),
   build: {
     assets: '_assets',
