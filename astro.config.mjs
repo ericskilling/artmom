@@ -4,16 +4,22 @@ import react from '@astrojs/react';
 import sveltia from 'astro-loader-sveltia-cms';
 import cloudflare from '@astrojs/cloudflare';
 
+const isProd = process.env.NODE_ENV === 'production';
+
 // https://astro.build/config
 export default defineConfig({
   integrations: [
     react(),
     sveltia({
       config: {
-        backend: {
-          name: 'local', // Use local filesystem for development
+        backend: isProd ? {
+          name: 'github',
+          repo: 'ericskilling/artmom',
+          branch: 'main',
+        } : {
+          name: 'local',
         },
-        local_deployment: true,
+        display_url: 'https://artmom.pages.dev',
         media_folder: 'public/images',
         public_folder: '/images',
         collections: [
@@ -27,7 +33,7 @@ export default defineConfig({
               { name: 'bio', widget: 'markdown' },
               { name: 'location', widget: 'string' },
               { name: 'activeSince', widget: 'string' },
-              { name: 'heroImagePath', widget: 'string', required: false, label: 'Hero Image Path' },
+              { name: 'heroImage', widget: 'image', required: false, label: 'Hero Image' },
             ],
           },
           {
@@ -38,7 +44,7 @@ export default defineConfig({
               { name: 'title', widget: 'string', required: true },
               { name: 'year', widget: 'string' },
               { name: 'medium', widget: 'string' },
-              { name: 'artworkImage', widget: 'string', required: false, label: 'Image Path' },
+              { name: 'image', widget: 'image', required: false, label: 'Image' },
               { name: 'dimensions', widget: 'string', required: false },
               { name: 'featured', widget: 'boolean', required: false, label: 'Featured on Home' },
               { name: 'description', widget: 'markdown', required: false },
@@ -81,7 +87,7 @@ export default defineConfig({
               { name: 'title', widget: 'string', required: true },
               { name: 'year', widget: 'string' },
               { name: 'format', widget: 'string' },
-              { name: 'comicImage', widget: 'string', required: false, label: 'Image Path' },
+              { name: 'image', widget: 'image', required: false, label: 'Image' },
               { name: 'featured', widget: 'boolean', required: false },
               { name: 'description', widget: 'markdown', required: false },
             ],
@@ -90,13 +96,10 @@ export default defineConfig({
       },
     }),
   ],
-  output: 'static',
+  output: 'server',
   adapter: cloudflare({
     imageService: 'cloudflare',
   }),
-  build: {
-    assets: '_assets',
-  },
   build: {
     assets: '_assets',
   },
