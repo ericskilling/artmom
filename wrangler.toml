@@ -1,17 +1,10 @@
+# Cloudflare Pages configuration
+# For deployment to Cloudflare Pages (not Workers)
+
 name = "artmom"
 compatibility_date = "2024-01-01"
-compatibility_flags = ["nodejs_compat"]
+compatibility_flags = ["nodejs_compat_v2"]
 
 [build]
 command = "npm run build"
 cwd = "."
-watch_dir = "public"
-
-[site]
-bucket = "./dist/client"
-
-[pages]
-build_output_dir = "./dist/client"
-
-[vars]
-IMAGE_BUNDLE = "true"
