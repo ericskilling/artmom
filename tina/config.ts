@@ -63,6 +63,7 @@ export default defineConfig({
             type: "string",
             name: "activeSince",
             label: "Making Art Since",
+            description: "e.g., 1998", // Added to nudge the indexer
           },
           {
             type: "image",
