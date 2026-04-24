@@ -14,9 +14,9 @@ const sortedComics = comics.sort((a, b) => parseInt(b.data.year) - parseInt(a.da
         {comics.map((comic, index) => (
           <article class={`comic-card comic-card-${index + 1}`}>
             <div class="card-accent-top"></div>
-            {comic.data.image ? (
+            {comic.data.comicImage ? (
               <div class="comic-image-wrap">
-                <img src={comic.data.image} alt={comic.data.title} />
+                <img src={comic.data.comicImage} alt={comic.data.title} />
               </div>
             ) : (
               <div class="comic-placeholder">

@@ -23,9 +23,9 @@ const upcomingWorkshops = workshops.filter(w => !w.data.past).sort((a, b) => new
         <p class="tagline">Bold. Geometric. Autobiographical.</p>
         <p class="bio-preview">{artistInfo.bio}</p>
         
-        {artistInfo.heroImage && (
+        {artistInfo.heroImagePath && (
           <div class="hero-artwork">
-            <img src={artistInfo.heroImage} alt="Rachelle Ymay Skilling" />
+            <img src={artistInfo.heroImagePath} alt="Rachelle Ymay Skilling" />
           </div>
         )}
       </div>
@@ -86,9 +86,9 @@ const upcomingWorkshops = workshops.filter(w => !w.data.past).sort((a, b) => new
         {sortedArtworks.map((artwork, index) => (
           <article class={`artwork-card artwork-card-${index + 1}`}>
             <div class="card-accent-top"></div>
-            {artwork.data.image ? (
+            {artwork.data.artworkImage ? (
               <div class="artwork-image-wrap">
-                <img src={artwork.data.image} alt={artwork.data.title} />
+                <img src={artwork.data.artworkImage} alt={artwork.data.title} />
               </div>
             ) : (
               <div class="artwork-image-wrap artwork-placeholder">
@@ -117,9 +117,9 @@ const upcomingWorkshops = workshops.filter(w => !w.data.past).sort((a, b) => new
         {featuredComics.map((comic, index) => (
           <article class={`artwork-card artwork-card-${index + 1}`}>
             <div class="card-accent-top"></div>
-            {comic.data.image ? (
+            {comic.data.comicImage ? (
               <div class="artwork-image-wrap">
-                <img src={comic.data.image} alt={comic.data.title} />
+                <img src={comic.data.comicImage} alt={comic.data.title} />
               </div>
             ) : (
               <div class="artwork-image-wrap artwork-placeholder">
