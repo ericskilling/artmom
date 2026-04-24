@@ -96,10 +96,7 @@ export default defineConfig({
       },
     }),
   ],
-  output: 'server',
-  adapter: cloudflare({
-    imageService: 'cloudflare',
-  }),
+  output: 'static',
   build: {
     assets: '_assets',
   },
