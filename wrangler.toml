@@ -10,5 +10,8 @@ watch_dir = "public"
 [site]
 bucket = "./dist/client"
 
+[pages]
+build_output_dir = "./dist/client"
+
 [vars]
 IMAGE_BUNDLE = "true"

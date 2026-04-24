@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "astro dev --port 3000",
     "build": "astro build",
+    "build:prod": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
