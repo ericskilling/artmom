@@ -16,6 +16,8 @@ export default defineConfig({
           name: 'github',
           repo: 'ericskilling/artmom',
           branch: 'main',
+          base_url: 'https://artmom.pages.dev',
+          auth_endpoint: 'api/auth',
         } : {
           name: 'local',
         },
