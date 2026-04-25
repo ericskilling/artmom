@@ -25,7 +25,17 @@ function fixImagePaths() {
 
       content = content.replace(
         /(artworkImage|comicImage|heroImagePath): \/assets\/images\/([^\n]+)$/gm,
-        '$1: ../../assets/images/$2'
+        '$1: ../../assets/images/$1'
+      );
+
+      content = content.replace(
+        /(artworkImage|comicImage|heroImagePath): src\/src\/assets\/images\/([^\n]+)$/gm,
+        '$1: ../../src/assets/images/$1'
+      );
+
+      content = content.replace(
+        /(artworkImage|comicImage|heroImagePath): src\/assets\/images\/([^\n]+)$/gm,
+        '$1: ../../src/assets/images/$1'
       );
 
       if (content !== original) {
