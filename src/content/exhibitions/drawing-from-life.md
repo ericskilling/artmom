@@ -1,9 +1,9 @@
 ---
-title: "Modern Love; Mother Care"
-venue: "The Lebel Mansion"
-location: "Pincher Creek"
-startDate: "2025-01-01"
-endDate: "2025-10-24"
+title: "Drawing From Life"
+venue: "Congress Coffee House"
+location: "Calgary, Alberta"
+startDate: "2023-09-01"
+endDate: "2023-12-05"
 featured: false
 description: "A series of art about the balance of caregiving. 'Modern Love; Mother Care' explores 'Mother Care', which encompasses both the care directed towards others and the essential care for oneself."
 ---

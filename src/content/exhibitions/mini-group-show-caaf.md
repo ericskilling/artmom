@@ -1,10 +1,10 @@
 ---
-title: "Modern Love; Mother Care"
-venue: "The Lebel Mansion"
-location: "Pincher Creek"
-startDate: "2025-01-01"
-endDate: "2025-10-24"
-featured: false
+title: "Mini Group Show with CAAF"
+venue: "The Alcove Centre for Arts"
+location: "Calgary, Alberta"
+startDate: "2026-02-01"
+endDate: "2026-03-01"
+featured: true
 description: "A series of art about the balance of caregiving. 'Modern Love; Mother Care' explores 'Mother Care', which encompasses both the care directed towards others and the essential care for oneself."
 ---
 
