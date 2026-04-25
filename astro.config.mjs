@@ -40,12 +40,12 @@ export default defineConfig({
               { name: 'heroImagePath', widget: 'image', required: false, label: 'Hero Image' },
             ],
           },
-          {
+{
             name: 'artworks',
             label: 'Artworks',
             folder: 'src/content/artworks',
-            media_folder: '../../src/assets/images',
-            public_folder: '/assets/images',
+            media_folder: '',
+            public_folder: '',
             fields: [
               { name: 'title', widget: 'string', required: true },
               { name: 'year', widget: 'string' },
