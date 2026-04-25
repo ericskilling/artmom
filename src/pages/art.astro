@@ -4,6 +4,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const artworks = await getCollection('artworks');
 const sortedArtworks = artworks.sort((a, b) => parseInt(b.data.year) - parseInt(a.data.year));
+
+function resolveImagePath(path) {
+  if (!path || typeof path !== 'string') return path;
+  if (path.startsWith('/assets/')) {
+    return '../../' + path;
+  }
+  return path;
+}
 ---
 
 <BaseLayout title="Art - Rachelle Ymay Skilling" description="Contemporary artwork from Calgary artist Rachelle Ymay Skilling">
@@ -16,7 +24,7 @@ const sortedArtworks = artworks.sort((a, b) => parseInt(b.data.year) - parseInt(
             <div class="card-accent-top"></div>
             {artwork.data.artworkImage ? (
               <div class="artwork-image-wrap">
-                <img src={artwork.data.artworkImage} alt={artwork.data.title} />
+                <img src={resolveImagePath(artwork.data.artworkImage)} alt={artwork.data.title} />
               </div>
             ) : (
               <div class={`artwork-image-wrap artwork-placeholder artwork-placeholder-${(index % 3) + 1}`}>

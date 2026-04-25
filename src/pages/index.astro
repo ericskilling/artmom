@@ -13,6 +13,14 @@ const sortedArtworks = artworks.sort((a, b) => parseInt(b.data.year) - parseInt(
 const sortedExhibitions = exhibitions.sort((a, b) => new Date(b.data.startDate).getTime() - new Date(a.data.startDate).getTime()).slice(0, 3);
 const featuredComics = comics.filter(c => c.data.featured);
 const upcomingWorkshops = workshops.filter(w => !w.data.past).sort((a, b) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime());
+
+function resolveImagePath(path) {
+  if (!path || typeof path !== 'string') return path;
+  if (path.startsWith('/assets/')) {
+    return '../../' + path;
+  }
+  return path;
+}
 ---
 
 <BaseLayout title="Rachelle Ymay Skilling - Contemporary Artist" description={artistInfo.tagline || "Contemporary Artist from Calgary, Alberta"}>
@@ -25,7 +33,7 @@ const upcomingWorkshops = workshops.filter(w => !w.data.past).sort((a, b) => new
         
         {artistInfo.heroImagePath && (
           <div class="hero-artwork">
-            <img src={artistInfo.heroImagePath} alt="Rachelle Ymay Skilling" />
+            <img src={resolveImagePath(artistInfo.heroImagePath)} alt="Rachelle Ymay Skilling" />
           </div>
         )}
       </div>
@@ -88,7 +96,7 @@ const upcomingWorkshops = workshops.filter(w => !w.data.past).sort((a, b) => new
             <div class="card-accent-top"></div>
             {artwork.data.artworkImage ? (
               <div class="artwork-image-wrap">
-                <img src={artwork.data.artworkImage} alt={artwork.data.title} />
+                <img src={resolveImagePath(artwork.data.artworkImage)} alt={artwork.data.title} />
               </div>
             ) : (
               <div class="artwork-image-wrap artwork-placeholder">
@@ -119,7 +127,7 @@ const upcomingWorkshops = workshops.filter(w => !w.data.past).sort((a, b) => new
             <div class="card-accent-top"></div>
             {comic.data.comicImage ? (
               <div class="artwork-image-wrap">
-                <img src={comic.data.comicImage} alt={comic.data.title} />
+                <img src={resolveImagePath(comic.data.comicImage)} alt={comic.data.title} />
               </div>
             ) : (
               <div class="artwork-image-wrap artwork-placeholder">

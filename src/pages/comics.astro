@@ -4,6 +4,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const comics = await getCollection('comics');
 const sortedComics = comics.sort((a, b) => parseInt(b.data.year) - parseInt(a.data.year));
+
+function resolveImagePath(path) {
+  if (!path || typeof path !== 'string') return path;
+  if (path.startsWith('/assets/')) {
+    return '../../' + path;
+  }
+  return path;
+}
 ---
 
 <BaseLayout title="Comics - Rachelle Ymay Skilling" description="Graphic stories and comics by Rachelle Ymay Skilling">
@@ -16,7 +24,7 @@ const sortedComics = comics.sort((a, b) => parseInt(b.data.year) - parseInt(a.da
             <div class="card-accent-top"></div>
             {comic.data.comicImage ? (
               <div class="comic-image-wrap">
-                <img src={comic.data.comicImage} alt={comic.data.title} />
+                <img src={resolveImagePath(comic.data.comicImage)} alt={comic.data.title} />
               </div>
             ) : (
               <div class="comic-placeholder">
