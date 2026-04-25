@@ -29,6 +29,8 @@ export default defineConfig({
             name: 'artist',
             label: 'Artist Information',
             folder: 'src/content/artist',
+            media_folder: '../../src/assets/images',
+            public_folder: '/assets/images',
             fields: [
               { name: 'name', widget: 'string', required: true },
               { name: 'tagline', widget: 'string' },
@@ -42,6 +44,8 @@ export default defineConfig({
             name: 'artworks',
             label: 'Artworks',
             folder: 'src/content/artworks',
+            media_folder: '../../src/assets/images',
+            public_folder: '/assets/images',
             fields: [
               { name: 'title', widget: 'string', required: true },
               { name: 'year', widget: 'string' },
@@ -69,6 +73,8 @@ export default defineConfig({
             name: 'comics',
             label: 'Comics',
             folder: 'src/content/comics',
+            media_folder: '../../src/assets/images',
+            public_folder: '/assets/images',
             fields: [
               { name: 'title', widget: 'string', required: true },
               { name: 'year', widget: 'string' },
