@@ -22,8 +22,8 @@ export default defineConfig({
           name: 'local',
         },
         display_url: 'https://artmom.pages.dev',
-        media_folder: 'public/images',
-        public_folder: '/images',
+        media_folder: 'src/assets/images',
+        public_folder: '../../assets/images',
         collections: [
           {
             name: 'artist',
@@ -52,7 +52,19 @@ export default defineConfig({
               { name: 'description', widget: 'markdown', required: false },
             ],
           },
-          ...
+          {
+            name: 'exhibitions',
+            label: 'Exhibitions',
+            folder: 'src/content/exhibitions',
+            fields: [
+              { name: 'title', widget: 'string', required: true },
+              { name: 'venue', widget: 'string' },
+              { name: 'location', widget: 'string' },
+              { name: 'startDate', widget: 'string', label: 'Start Date' },
+              { name: 'endDate', widget: 'string', label: 'End Date' },
+              { name: 'description', widget: 'markdown', required: false },
+            ],
+          },
           {
             name: 'comics',
             label: 'Comics',
@@ -78,19 +90,6 @@ export default defineConfig({
               { name: 'time', widget: 'string', required: false },
               { name: 'registerUrl', widget: 'string', required: false, label: 'Registration URL' },
               { name: 'past', widget: 'boolean', required: false, label: 'Past Workshop' },
-              { name: 'description', widget: 'markdown', required: false },
-            ],
-          },
-          {
-            name: 'comics',
-            label: 'Comics',
-            folder: 'src/content/comics',
-            fields: [
-              { name: 'title', widget: 'string', required: true },
-              { name: 'year', widget: 'string' },
-              { name: 'format', widget: 'string' },
-              { name: 'image', widget: 'image', required: false, label: 'Image' },
-              { name: 'featured', widget: 'boolean', required: false },
               { name: 'description', widget: 'markdown', required: false },
             ],
           },
