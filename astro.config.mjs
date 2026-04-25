@@ -23,7 +23,7 @@ export default defineConfig({
         },
         display_url: 'https://artmom.pages.dev',
         media_folder: 'src/assets/images',
-        public_folder: '../../assets/images',
+        public_folder: '/assets/images',
         collections: [
           {
             name: 'artist',
