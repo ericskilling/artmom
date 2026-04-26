@@ -19,6 +19,13 @@ const sortedPublications = publications.sort((a, b) => parseInt(b.data.year) - p
               {publication.data.location && <span class="location">, {publication.data.location}</span>}
               {publication.data.year && <span class="year"> ({publication.data.year})</span>}
             </p>
+            {publication.data.links && publication.data.links.length > 0 && (
+              <ul class="publication-links">
+                {publication.data.links.map((link) => (
+                  <li><a href={link} target="_blank" rel="noopener">{link}</a></li>
+                ))}
+              </ul>
+            )}
             {publication.data.description && (
               <p class="publication-description">{publication.data.description}</p>
             )}
