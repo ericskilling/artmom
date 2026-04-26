@@ -102,7 +102,7 @@ export default defineConfig({
               { name: 'year', widget: 'string', required: true },
               { name: 'publisher', widget: 'string', label: 'Publisher / Publication' },
               { name: 'links', widget: 'list', required: false, label: 'Links' },
-              { name: 'location', widget: 'string' },
+              { name: 'location', widget: 'string', required: false },
               { name: 'description', widget: 'markdown', required: false },
             ],
           },
