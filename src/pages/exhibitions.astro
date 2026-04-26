@@ -4,6 +4,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const exhibitions = await getCollection('exhibitions');
 const sortedExhibitions = exhibitions.sort((a, b) => new Date(b.data.startDate).getTime() - new Date(a.data.startDate).getTime());
+
+function resolveImagePath(path) {
+  if (!path) return path;
+  if (typeof path === 'object' && path !== null) {
+    path = path.url || path.path || path.src || '';
+  }
+  if (typeof path !== 'string') return path;
+  if (path.startsWith('/assets/')) {
+    return '../../' + path;
+  }
+  return path;
+}
 ---
 
 <BaseLayout title="Exhibitions - Rachelle Ymay Skilling" description="Past exhibitions by Rachelle Ymay Skilling">
@@ -13,6 +25,11 @@ const sortedExhibitions = exhibitions.sort((a, b) => new Date(b.data.startDate).
       <ul class="exhibition-list">
         {sortedExhibitions.map((exhibition) => (
           <li class="exhibition-item">
+            {exhibition.data.image && (
+              <div class="exhibition-image">
+                <img src={resolveImagePath(exhibition.data.image)} alt={exhibition.data.title} />
+              </div>
+            )}
             <h4>{exhibition.data.title}</h4>
             <p class="exhibition-venue">
               <span class="venue">{exhibition.data.venue}</span>

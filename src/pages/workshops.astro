@@ -5,6 +5,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 const workshops = await getCollection('workshops');
 const upcoming = workshops.filter(w => !w.data.past).sort((a, b) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime());
 const past = workshops.filter(w => w.data.past);
+
+function resolveImagePath(path) {
+  if (!path) return path;
+  if (typeof path === 'object' && path !== null) {
+    path = path.url || path.path || path.src || '';
+  }
+  if (typeof path !== 'string') return path;
+  if (path.startsWith('/assets/')) {
+    return '../../' + path;
+  }
+  return path;
+}
 ---
 
 <BaseLayout title="Workshops - Rachelle Ymay Skilling" description="Comics workshops and classes by Rachelle Ymay Skilling">
@@ -18,6 +30,11 @@ const past = workshops.filter(w => w.data.past);
           <ul class="exhibition-list">
             {upcoming.map((workshop) => (
               <li class="exhibition-item">
+                {workshop.data.image && (
+                  <div class="exhibition-image">
+                    <img src={resolveImagePath(workshop.data.image)} alt={workshop.data.title} />
+                  </div>
+                )}
                 <h4>{workshop.data.title}</h4>
                 <p class="exhibition-venue">
                   {workshop.data.organization && <span class="venue">{workshop.data.organization}</span>}
@@ -45,6 +62,11 @@ const past = workshops.filter(w => w.data.past);
           <ul class="exhibition-list">
             {past.map((workshop) => (
               <li class="exhibition-item">
+                {workshop.data.image && (
+                  <div class="exhibition-image">
+                    <img src={resolveImagePath(workshop.data.image)} alt={workshop.data.title} />
+                  </div>
+                )}
                 <h4>{workshop.data.title}</h4>
                 <p class="exhibition-venue">
                   {workshop.data.organization && <span class="venue">{workshop.data.organization}</span>}
