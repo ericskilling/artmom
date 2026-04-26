@@ -4,11 +4,28 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const about = await getCollection('artist');
 const artistInfo = about[0]?.data || {};
+
+function resolveImagePath(path) {
+  if (!path) return path;
+  if (typeof path === 'object' && path !== null) {
+    path = path.url || path.path || path.src || '';
+  }
+  if (typeof path !== 'string') return path;
+  if (path.startsWith('/assets/')) {
+    return '../../' + path;
+  }
+  return path;
+}
 ---
 
 <BaseLayout title="About - Rachelle Ymay Skilling" description={`About ${artistInfo.name} - ${artistInfo.tagline}`}>
   <main>
     <section class="profile">
+      {artistInfo.heroImagePath && (
+        <div class="hero-artwork">
+          <img src={resolveImagePath(artistInfo.heroImagePath)} alt={artistInfo.name} />
+        </div>
+      )}
       <h3>{artistInfo.name}</h3>
       <p class="tagline">{artistInfo.tagline}</p>
       <div class="bio">

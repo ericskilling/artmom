@@ -15,7 +15,11 @@ const featuredComics = comics.filter(c => c.data.featured);
 const upcomingWorkshops = workshops.filter(w => !w.data.past).sort((a, b) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime());
 
 function resolveImagePath(path) {
-  if (!path || typeof path !== 'string') return path;
+  if (!path) return path;
+  if (typeof path === 'object' && path !== null) {
+    path = path.url || path.path || path.src || '';
+  }
+  if (typeof path !== 'string') return path;
   if (path.startsWith('/assets/')) {
     return '../../' + path;
   }
@@ -27,15 +31,16 @@ function resolveImagePath(path) {
   <main>
     <section class="hero" id="home">
       <div class="hero-content">
-        <h2><span>{artistInfo.tagline || 'Contemporary Artist'}</span> Calgary, Alberta</h2>
-        <p class="tagline">Bold. Geometric. Autobiographical.</p>
-        <p class="bio-preview">{artistInfo.bio}</p>
+        {/* <h2><span>{artistInfo.tagline || 'Contemporary Artist'}</span> Calgary, Alberta</h2> */}
+        {/* <p class="tagline">Bold. Geometric. Autobiographical.</p> */}
         
         {artistInfo.heroImagePath && (
           <div class="hero-artwork">
             <img src={resolveImagePath(artistInfo.heroImagePath)} alt="Rachelle Ymay Skilling" />
           </div>
         )}
+        
+        <p class="bio-preview">{artistInfo.bio}</p>
       </div>
     </section>
 
@@ -46,20 +51,27 @@ function resolveImagePath(path) {
     <section id="workshops">
       <h3>Workshops</h3>
       {upcomingWorkshops.length > 0 ? (
-        <div class="workshop-list">
+        <ul class="exhibition-list">
           {upcomingWorkshops.slice(0, 1).map((workshop) => (
-            <article class="workshop-item">
+            <li class="exhibition-item">
               <h4>{workshop.data.title}</h4>
-              <p class="workshop-org">{workshop.data.organization}</p>
-              <p class="workshop-date">{new Date(workshop.data.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
-              {workshop.data.time && <p class="workshop-time">{workshop.data.time}</p>}
-              {workshop.data.description && <p class="workshop-description">{workshop.data.description}</p>}
+              <p class="exhibition-venue">
+                {workshop.data.organization && <span class="venue">{workshop.data.organization}</span>}
+                {workshop.data.location && <span class="location">, {workshop.data.location}</span>}
+              </p>
+              <p class="exhibition-date">
+                {new Date(workshop.data.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                {workshop.data.time && ` - ${workshop.data.time}`}
+              </p>
+              {workshop.data.description && (
+                <p class="exhibition-description">{workshop.data.description}</p>
+              )}
               {workshop.data.registerUrl && (
                 <a href={workshop.data.registerUrl} class="btn" target="_blank">Register</a>
               )}
-            </article>
+            </li>
           ))}
-        </div>
+        </ul>
       ) : (
         <p>No upcoming workshops at this time.</p>
       )}

@@ -164,10 +164,94 @@ body::after {
 section {
   padding: 6rem 2rem;
   position: relative;
-  background-color: #002366;
   color: #ffffff;
   z-index: 1;
   isolation: isolate;
+}
+
+main {
+  position: relative;
+  overflow: visible;
+  z-index: 1;
+  isolation: isolate;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.4;
+  color: #002366;
+  background-color: #002366;
+  overflow-x: hidden;
+  padding: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+body h2 {
+  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-size: 5rem;
+  font-weight: 900;
+  color: #FF1493;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 8px;
+  line-height: 1;
+}
+
+body h2 span {
+  color: #DFFF00;
+  display: block;
+  font-size: 0.7em;
+}
+
+body .tagline {
+  font-size: 1.8rem;
+  color: #FF1493;
+  margin-bottom: 2.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+}
+
+body .bio-preview {
+  max-width: 800px;
+  margin: 0 auto;
+  color: #ffffff;
+  font-size: 1.3rem;
+}
+
+/* Hero::before gradients moved to main */
+main::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    linear-gradient(127deg, transparent 45%, rgba(255, 20, 147, 0.25) 45%, rgba(255, 20, 147, 0.25) 48%, transparent 48%) 5% 10% / 180px 60px no-repeat,
+    linear-gradient(143deg, transparent 42%, rgba(255, 140, 0, 0.3) 42%, rgba(255, 140, 0, 0.3) 46%, transparent 46%) 15% 5% / 220px 80px no-repeat,
+    linear-gradient(118deg, transparent 48%, rgba(223, 255, 0, 0.2) 48%, rgba(223, 255, 0, 0.2) 52%, transparent 52%) 25% 15% / 140px 50px no-repeat,
+    linear-gradient(152deg, transparent 40%, rgba(139, 69, 19, 0.25) 40%, rgba(139, 69, 19, 0.25) 45%, transparent 45%) 35% 8% / 200px 70px no-repeat,
+    linear-gradient(128deg, transparent 44%, rgba(255, 20, 147, 0.28) 44%, rgba(255, 20, 147, 0.28) 49%, transparent 49%) 45% 20% / 160px 55px no-repeat;
+}
+
+/* Hero::after gradients moved to main */
+main::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    linear-gradient(112deg, transparent 40%, rgba(255, 20, 147, 0.35) 40%, rgba(255, 20, 147, 0.35) 45%, transparent 45%) 2% 8% / 120px 35px no-repeat,
+    linear-gradient(158deg, transparent 38%, rgba(255, 140, 0, 0.4) 38%, rgba(255, 140, 0, 0.4) 44%, transparent 44%) 22% 3% / 180px 50px no-repeat,
+    linear-gradient(95deg, transparent 42%, rgba(223, 255, 0, 0.32) 42%, rgba(223, 255, 0, 0.32) 48%, transparent 48%) 42% 12% / 100px 30px no-repeat;
 }
 
 /* ============================================
@@ -270,7 +354,7 @@ nav {
 
 nav h1 {
   font-family: 'Zalando Sans Expanded', sans-serif;
-  font-size: 2.2rem;
+  font-size: 3rem;
   font-weight: 900;
   color: #002366;
   text-transform: uppercase;
@@ -310,6 +394,8 @@ nav h1 span {
   display: block;
   font-size: 1em;
   letter-spacing: 6px;
+  line-height: 1;
+  margin-bottom: -0.15em;
 }
 
 nav ul, nav .nav-links {
@@ -408,7 +494,7 @@ nav a:hover {
    ============================================ */
 .hero {
   text-align: center;
-  padding: 8rem 2rem 10rem;
+  padding: 2rem 2rem 10rem;
   background-color: #002366;
   position: relative;
   overflow: visible;
@@ -790,12 +876,12 @@ nav a:hover {
 section {
   padding: 6rem 2rem;
   position: relative;
-  background-color: #ffffff;
+/*  background-color: #ffffff; */
   z-index: 5;
   isolation: isolate;
 }
 
-/* Chaotic lines on white sections too - varying lengths, more opaque */
+/* Chaotic lines on white sections too - varying lengths, more opaque 
 section:nth-child(odd)::before {
   content: '';
   position: absolute;
@@ -805,8 +891,7 @@ section:nth-child(odd)::before {
   bottom: 0;
   pointer-events: none;
   background:
-    /* Short scattered lines */
-    linear-gradient(125deg, transparent 40%, rgba(255, 20, 147, 0.25) 40%, rgba(255, 20, 147, 0.25) 44%, transparent 44%) 5% 10% / 80px 30px no-repeat,
+linear-gradient(125deg, transparent 40%, rgba(255, 20, 147, 0.25) 40%, rgba(255, 20, 147, 0.25) 44%, transparent 44%) 5% 10% / 80px 30px no-repeat,
     linear-gradient(145deg, transparent 42%, rgba(255, 140, 0, 0.3) 42%, rgba(255, 140, 0, 0.3) 47%, transparent 47%) 15% 8% / 100px 35px no-repeat,
     linear-gradient(118deg, transparent 40%, rgba(0, 35, 102, 0.2) 40%, rgba(0, 35, 102, 0.2) 45%, transparent 45%) 25% 15% / 70px 25px no-repeat,
     linear-gradient(152deg, transparent 42%, rgba(255, 20, 147, 0.28) 42%, rgba(255, 20, 147, 0.28) 47%, transparent 47%) 85% 12% / 90px 32px no-repeat,
@@ -814,15 +899,13 @@ section:nth-child(odd)::before {
     linear-gradient(138deg, transparent 42%, rgba(223, 255, 0, 0.2) 42%, rgba(223, 255, 0, 0.2) 47%, transparent 47%) 55% 5% / 75px 30px no-repeat,
     linear-gradient(115deg, transparent 40%, rgba(139, 69, 19, 0.25) 40%, rgba(139, 69, 19, 0.25) 45%, transparent 45%) 65% 18% / 95px 35px no-repeat,
     linear-gradient(148deg, transparent 42%, rgba(0, 35, 102, 0.28) 42%, rgba(0, 35, 102, 0.28) 47%, transparent 47%) 75% 25% / 80px 28px no-repeat,
-    /* Medium lines */
-    linear-gradient(125deg, transparent 40%, rgba(255, 20, 147, 0.3) 40%, rgba(255, 20, 147, 0.3) 44%, transparent 44%) 3% 55% / 200px 50px no-repeat,
+linear-gradient(125deg, transparent 40%, rgba(255, 20, 147, 0.3) 40%, rgba(255, 20, 147, 0.3) 44%, transparent 44%) 3% 55% / 200px 50px no-repeat,
     linear-gradient(145deg, transparent 42%, rgba(255, 140, 0, 0.28) 42%, rgba(255, 140, 0, 0.28) 47%, transparent 47%) 13% 50% / 180px 45px no-repeat,
     linear-gradient(118deg, transparent 40%, rgba(0, 35, 102, 0.25) 40%, rgba(0, 35, 102, 0.25) 45%, transparent 45%) 23% 58% / 150px 40px no-repeat,
     linear-gradient(152deg, transparent 42%, rgba(255, 20, 147, 0.3) 42%, rgba(255, 20, 147, 0.3) 47%, transparent 47%) 33% 52% / 220px 55px no-repeat,
     linear-gradient(128deg, transparent 40%, rgba(255, 140, 0, 0.25) 40%, rgba(255, 140, 0, 0.25) 45%, transparent 45%) 43% 60% / 170px 42px no-repeat,
     linear-gradient(138deg, transparent 42%, rgba(223, 255, 0, 0.28) 42%, rgba(223, 255, 0, 0.28) 47%, transparent 47%) 53% 48% / 190px 48px no-repeat,
-    /* Lines extending to viewport edges */
-    linear-gradient(110deg, transparent 40%, rgba(255, 20, 147, 0.35) 40%, rgba(255, 20, 147, 0.35) 44%, transparent 44%) -5% 30% / 60vw 40px no-repeat,
+linear-gradient(110deg, transparent 40%, rgba(255, 20, 147, 0.35) 40%, rgba(255, 20, 147, 0.35) 44%, transparent 44%) -5% 30% / 60vw 40px no-repeat,
     linear-gradient(150deg, transparent 40%, rgba(255, 140, 0, 0.3) 40%, rgba(255, 140, 0, 0.3) 44%, transparent 44%) 105% 35% / 60vw 35px no-repeat,
     linear-gradient(95deg, transparent 40%, rgba(0, 35, 102, 0.28) 40%, rgba(0, 35, 102, 0.28) 44%, transparent 44%) 0% 70% / 55vw 42px no-repeat,
     linear-gradient(140deg, transparent 40%, rgba(255, 20, 147, 0.3) 40%, rgba(255, 20, 147, 0.3) 44%, transparent 44%) 105% 75% / 58vw 38px no-repeat,
@@ -839,22 +922,20 @@ section:nth-child(odd)::after {
   bottom: 0;
   pointer-events: none;
   background:
-    /* Short accent strokes */
-    linear-gradient(112deg, transparent 40%, rgba(255, 140, 0, 0.35) 40%, rgba(255, 140, 0, 0.35) 45%, transparent 45%) 8% 3% / 65px 22px no-repeat,
+linear-gradient(112deg, transparent 40%, rgba(255, 140, 0, 0.35) 40%, rgba(255, 140, 0, 0.35) 45%, transparent 45%) 8% 3% / 65px 22px no-repeat,
     linear-gradient(158deg, transparent 38%, rgba(0, 35, 102, 0.3) 38%, rgba(0, 35, 102, 0.3) 44%, transparent 44%) 92% 8% / 70px 25px no-repeat,
     linear-gradient(95deg, transparent 42%, rgba(255, 20, 147, 0.32) 42%, rgba(255, 20, 147, 0.32) 48%, transparent 48%) 42% 85% / 60px 20px no-repeat,
     linear-gradient(168deg, transparent 36%, rgba(223, 255, 0, 0.3) 36%, rgba(223, 255, 0, 0.3) 42%, transparent 42%) 62% 90% / 75px 28px no-repeat,
-    /* Medium strokes */
-    linear-gradient(108deg, transparent 40%, rgba(139, 69, 19, 0.35) 40%, rgba(139, 69, 19, 0.35) 46%, transparent 46%) 2% 25% / 120px 35px no-repeat,
+linear-gradient(108deg, transparent 40%, rgba(139, 69, 19, 0.35) 40%, rgba(139, 69, 19, 0.35) 46%, transparent 46%) 2% 25% / 120px 35px no-repeat,
     linear-gradient(148deg, transparent 38%, rgba(255, 20, 147, 0.32) 38%, rgba(255, 20, 147, 0.32) 44%, transparent 44%) 88% 30% / 140px 40px no-repeat,
     linear-gradient(88deg, transparent 44%, rgba(255, 140, 0, 0.3) 44%, rgba(255, 140, 0, 0.3) 50%, transparent 50%) 7% 65% / 110px 32px no-repeat,
     linear-gradient(162deg, transparent 36%, rgba(0, 35, 102, 0.35) 36%, rgba(0, 35, 102, 0.35) 42%, transparent 42%) 93% 70% / 130px 38px no-repeat,
-    /* Edge lines */
-    linear-gradient(105deg, transparent 40%, rgba(255, 20, 147, 0.4) 40%, rgba(255, 20, 147, 0.4) 44%, transparent 44%) -8% 15% / 48vw 30px no-repeat,
+linear-gradient(105deg, transparent 40%, rgba(255, 20, 147, 0.4) 40%, rgba(255, 20, 147, 0.4) 44%, transparent 44%) -8% 15% / 48vw 30px no-repeat,
     linear-gradient(155deg, transparent 38%, rgba(223, 255, 0, 0.35) 38%, rgba(223, 255, 0, 0.35) 44%, transparent 44%) 108% 20% / 50vw 32px no-repeat,
     linear-gradient(92deg, transparent 44%, rgba(139, 69, 19, 0.32) 44%, rgba(139, 69, 19, 0.32) 50%, transparent 50%) -5% 80% / 46vw 28px no-repeat,
     linear-gradient(165deg, transparent 38%, rgba(255, 140, 0, 0.35) 38%, rgba(255, 140, 0, 0.35) 44%, transparent 44%) 105% 85% / 52vw 34px no-repeat;
 }
+*/
 
 section h3 {
   font-family: 'Zalando Sans Expanded', sans-serif;
@@ -883,7 +964,6 @@ section .section-subhead {
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 4px;
-}
 }
 
 /* Wild underlines - angled */
@@ -1529,7 +1609,6 @@ section:nth-child(even) h3::after {
   height: 30px;
   background: #FF1493;
   clip-path: polygon(0% 3%, 100% 0%, 98% 100%, 0% 100%);
-  z-index: 2;
 }
 
 .exhibition-item:nth-child(even)::before {
@@ -1677,17 +1756,19 @@ section:nth-child(even) h3::after {
   font-family: 'Montserrat', sans-serif;
   font-size: 1.3rem;
   font-weight: 700;
-  color: #FF1493;
+  color: #dfff00;
   margin-bottom: 0.4rem;
   text-transform: uppercase;
   letter-spacing: 1px;
+  position: relative;
+  z-index: 1;
 }
 
 .exhibition-venue {
   font-family: 'Montserrat', sans-serif;
   display: flex;
   gap: 0.5rem;
-  color: #002366;
+  color: #333333;
   margin-bottom: 0.4rem;
   flex-wrap: wrap;
   font-size: 0.95rem;
@@ -1695,12 +1776,12 @@ section:nth-child(even) h3::after {
 
 .exhibition-venue .venue {
   font-weight: 700;
-  color: #FF1493;
+  color: #002366;
 }
 
 .exhibition-date {
   font-family: 'Montserrat', sans-serif;
-  color: #8B4513;
+  color: #666666;
   font-size: 0.9rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
@@ -1709,10 +1790,30 @@ section:nth-child(even) h3::after {
 
 .exhibition-description {
   font-family: 'Montserrat', sans-serif;
-  color: #002366;
+  color: #333333;
   margin-top: 0.4rem;
   font-size: 0.9rem;
   line-height: 1.35;
+}
+
+.publication-links {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0;
+}
+
+.publication-links li {
+  margin-bottom: 0.25rem;
+}
+
+.publication-links a {
+  color: #FF1493;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.publication-links a:hover {
+  text-decoration: underline;
 }
 
 .exhibition-image {
@@ -1902,7 +2003,7 @@ footer a:hover {
 
 .profile h3 {
   font-family: 'Zalando Sans Expanded', sans-serif;
-  color: #002366;
+  color: #DFFF00;
   font-size: 3.5rem;
   display: block;
   margin-bottom: 1rem;
@@ -1930,7 +2031,7 @@ footer a:hover {
   white-space: pre-wrap;
   line-height: 1.5;
   font-size: 1.05rem;
-  color: #002366;
+  color: #ffffff;
 }
 
 section:nth-child(even) .bio p {
@@ -1951,7 +2052,7 @@ section:nth-child(even) .bio p {
 
 .details dd {
   margin-bottom: 1.5rem;
-  color: #002366;
+  color: #DFFF00;
   font-size: 1.2rem;
 }
 
