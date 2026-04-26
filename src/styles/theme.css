@@ -1677,7 +1677,7 @@ section:nth-child(even) h3::after {
   font-family: 'Montserrat', sans-serif;
   font-size: 1.3rem;
   font-weight: 700;
-  color: #002366;
+  color: #FF1493;
   margin-bottom: 0.4rem;
   text-transform: uppercase;
   letter-spacing: 1px;
