@@ -39,36 +39,15 @@ function resolveImagePath(path) {
       </div>
     </section>
 
-    <div class="section-divider"></div>
-
-    <section id="about">
-      <h3>About</h3>
-      <div class="profile">
-        <h3>{artistInfo.name}</h3>
-        <p class="tagline">{artistInfo.tagline}</p>
-        <div class="bio">
-          <p>{artistInfo.bio}</p>
-        </div>
-        <dl class="details">
-          <dt>Location</dt>
-          <dd>{artistInfo.location}</dd>
-          {artistInfo.activeSince && (
-            <>
-              <dt>Making Art Since</dt>
-              <dd>{artistInfo.activeSince}</dd>
-            </>
-          )}
-        </dl>
-      </div>
-    </section>
+    
 
     <div class="section-divider"></div>
 
     <section id="workshops">
-      <h3>AUArts Class</h3>
+      <h3>Workshops</h3>
       {upcomingWorkshops.length > 0 ? (
         <div class="workshop-list">
-          {upcomingWorkshops.map((workshop) => (
+          {upcomingWorkshops.slice(0, 1).map((workshop) => (
             <article class="workshop-item">
               <h4>{workshop.data.title}</h4>
               <p class="workshop-org">{workshop.data.organization}</p>
