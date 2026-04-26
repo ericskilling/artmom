@@ -10,12 +10,12 @@ const sortedPublications = publications.sort((a, b) => parseInt(b.data.year) - p
   <main>
     <section>
       <h3>Publications & Media</h3>
-      <ul class="publication-list">
+      <ul class="exhibition-list">
         {sortedPublications.map((publication) => (
-          <li class="publication-item">
+          <li class="exhibition-item">
             <h4>{publication.data.title}</h4>
-            <p class="publication-details">
-              {publication.data.publisher && <span class="publisher">{publication.data.publisher}</span>}
+            <p class="exhibition-venue">
+              {publication.data.publisher && <span class="venue">{publication.data.publisher}</span>}
               {publication.data.location && <span class="location">, {publication.data.location}</span>}
               {publication.data.year && <span class="year"> ({publication.data.year})</span>}
             </p>
@@ -27,7 +27,7 @@ const sortedPublications = publications.sort((a, b) => parseInt(b.data.year) - p
               </ul>
             )}
             {publication.data.description && (
-              <p class="publication-description">{publication.data.description}</p>
+              <p class="exhibition-description">{publication.data.description}</p>
             )}
           </li>
         ))}

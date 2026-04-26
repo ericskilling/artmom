@@ -164,7 +164,8 @@ body::after {
 section {
   padding: 6rem 2rem;
   position: relative;
-  background-color: #ffffff;
+  background-color: #002366;
+  color: #ffffff;
   z-index: 1;
   isolation: isolate;
 }
@@ -307,7 +308,7 @@ nav h1 a::after {
 nav h1 span {
   color: #FF1493;
   display: block;
-  font-size: 0.55em;
+  font-size: 1em;
   letter-spacing: 6px;
 }
 
@@ -859,7 +860,7 @@ section h3 {
   font-family: 'Zalando Sans Expanded', sans-serif;
   font-size: 3.5rem;
   font-weight: 900;
-  color: #002366;
+  color: #ffffff;
   margin-bottom: 3rem;
   text-align: center;
   text-transform: uppercase;
@@ -871,6 +872,18 @@ section h3 {
   padding: 1rem 3rem;
   border: 5px solid #FF1493;
   clip-path: polygon(3% 0%, 100% 0%, 97% 100%, 0% 100%);
+}
+
+section .section-subhead {
+  font-family: 'Zalando Sans Expanded', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 3rem 0 2rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}
 }
 
 /* Wild underlines - angled */
