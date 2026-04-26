@@ -93,6 +93,18 @@ export default defineConfig({
               { name: 'description', widget: 'markdown', required: false },
             ],
           },
+          {
+            name: 'publications',
+            label: 'Publications & Media',
+            folder: 'src/content/publications',
+            fields: [
+              { name: 'title', widget: 'string', required: true },
+              { name: 'year', widget: 'string', required: true },
+              { name: 'publisher', widget: 'string', label: 'Publisher / Publication' },
+              { name: 'location', widget: 'string' },
+              { name: 'description', widget: 'markdown', required: false },
+            ],
+          },
         ],
       },
     }),

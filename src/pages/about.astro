@@ -1,173 +1,29 @@
 ---
 import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
 
 const about = await getCollection('artist');
 const artistInfo = about[0]?.data || {};
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="generator" content={Astro.generator} />
-    <title>About - {artistInfo.name}</title>
-    <meta name="description" content={`About ${artistInfo.name} - ${artistInfo.tagline}`} />
-  </head>
-  <body>
-    <header>
-      <nav>
-        <h1>{artistInfo.name}</h1>
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="/portfolio">Portfolio</a></li>
-          <li><a href="/exhibitions">Exhibitions</a></li>
-        </ul>
-      </nav>
-    </header>
-
-    <main>
-      <h2>About</h2>
-      
-      <section class="profile">
-        <h3>{artistInfo.name}</h3>
-        <p class="tagline">{artistInfo.tagline}</p>
-      </section>
-
-      <section class="bio">
-        <h3>Biography</h3>
+<BaseLayout title="About - Rachelle Ymay Skilling" description={`About ${artistInfo.name} - ${artistInfo.tagline}`}>
+  <main>
+    <section class="profile">
+      <h3>{artistInfo.name}</h3>
+      <p class="tagline">{artistInfo.tagline}</p>
+      <div class="bio">
         <p>{artistInfo.bio}</p>
-      </section>
-
-      <section class="details">
-        <h3>Details</h3>
-        <dl>
-          <dt>Location</dt>
-          <dd>{artistInfo.location}</dd>
-          <dt>Active Since</dt>
-          <dd>{artistInfo.activeSince ? new Date(artistInfo.activeSince).getFullYear() : '2018'}</dd>
-        </dl>
-      </section>
-    </main>
-
-    <footer>
-      <p>&copy; {new Date().getFullYear()} {artistInfo.name}. All rights reserved.</p>
-    </footer>
-  </body>
-</html>
-
-<style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background: #fafafa;
-  }
-
-  header {
-    padding: 2rem;
-    background: #fff;
-    border-bottom: 1px solid #eee;
-  }
-
-  nav {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-  nav h1 {
-    font-size: 1.5rem;
-    font-weight: 600;
-  }
-
-  nav ul {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-  }
-
-  nav a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-  }
-
-  nav a:hover {
-    color: #666;
-  }
-
-  main {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 3rem 2rem;
-  }
-
-  h2 {
-    font-size: 2rem;
-    margin-bottom: 2rem;
-  }
-
-  section {
-    margin-bottom: 3rem;
-  }
-
-  section h3 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: #555;
-  }
-
-  .profile {
-    text-align: center;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid #eee;
-  }
-
-  .tagline {
-    font-size: 1.25rem;
-    color: #666;
-    margin-top: 0.5rem;
-  }
-
-  .bio p {
-    white-space: pre-wrap;
-  }
-
-  .details dt {
-    font-weight: 600;
-    color: #555;
-  }
-
-  .details dd {
-    margin-bottom: 1rem;
-  }
-
-  footer {
-    text-align: center;
-    padding: 2rem;
-    background: #fff;
-    border-top: 1px solid #eee;
-    color: #666;
-    font-size: 0.9rem;
-  }
-
-  @media (max-width: 768px) {
-    nav {
-      flex-direction: column;
-      text-align: center;
-    }
-  }
-</style>
+      </div>
+      <dl class="details">
+        <dt>Location</dt>
+        <dd>{artistInfo.location}</dd>
+        {artistInfo.activeSince && (
+          <>
+            <dt>Making Art Since</dt>
+            <dd>{artistInfo.activeSince}</dd>
+          </>
+        )}
+      </dl>
+    </section>
+  </main>
+</BaseLayout>

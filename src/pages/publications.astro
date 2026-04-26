@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const publications = await getCollection('publications');
+const sortedPublications = publications.sort((a, b) => parseInt(b.data.year) - parseInt(a.data.year));
+---
+
+<BaseLayout title="Publications & Media - Rachelle Ymay Skilling" description="Publications, interviews, and media appearances by Rachelle Ymay Skilling">
+  <main>
+    <section>
+      <h3>Publications & Media</h3>
+      <ul class="publication-list">
+        {sortedPublications.map((publication) => (
+          <li class="publication-item">
+            <h4>{publication.data.title}</h4>
+            <p class="publication-details">
+              {publication.data.publisher && <span class="publisher">{publication.data.publisher}</span>}
+              {publication.data.location && <span class="location">, {publication.data.location}</span>}
+              {publication.data.year && <span class="year"> ({publication.data.year})</span>}
+            </p>
+            {publication.data.description && (
+              <p class="publication-description">{publication.data.description}</p>
+            )}
+          </li>
+        ))}
+      </ul>
+    </section>
+  </main>
+</BaseLayout>

@@ -21,10 +21,15 @@ const comics = defineCollection({
   loader: sveltiaLoader('comics'),
 });
 
+const publications = defineCollection({
+  loader: sveltiaLoader('publications'),
+});
+
 export const collections = {
   'artist': artist,
   'artworks': artworks,
   'exhibitions': exhibitions,
   'workshops': workshops,
   'comics': comics,
+  'publications': publications,
 };
