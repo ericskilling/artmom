@@ -1,50 +1,78 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { resolveImagePath } from '../lib/images';
+import { renderMarkdown } from '../lib/markdown';
 
 const exhibitions = await getCollection('exhibitions');
 const sortedExhibitions = exhibitions.sort((a, b) => new Date(b.data.startDate).getTime() - new Date(a.data.startDate).getTime());
 
-function resolveImagePath(path) {
-  if (!path) return path;
-  if (typeof path === 'object' && path !== null) {
-    path = path.url || path.path || path.src || '';
-  }
-  if (typeof path !== 'string') return path;
-  if (path.startsWith('/assets/')) {
-    return '../../' + path;
-  }
-  return path;
-}
+const artist = await getCollection('artist');
+const artistInfo = artist[0]?.data || {};
+
+const fullBio = artistInfo.cv_bio;
+const affiliations = artistInfo.affiliations || [];
 ---
 
-<BaseLayout title="Exhibitions - Rachelle Ymay Skilling" description="Past exhibitions by Rachelle Ymay Skilling">
-  <main>
-    <section>
-      <h3>Exhibitions</h3>
-      <ul class="exhibition-list">
+<BaseLayout 
+  title="Exhibitions & CV - Rachelle Ymay Skilling" 
+  description="Selected exhibitions and artist biography"
+  currentPage="exhibitions"
+>
+  <section class="text-center bg-royal-cobalt relative overflow-visible text-white z-10">
+     
+    <div class="relative z-10 max-w-[1000px] mx-auto bg-royal-cobalt/70 p-4">
+      <h1 class="font-zalando font-bold text-4xl uppercase tracking-wider">Exhibitions</h1>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <section class="py-4 px-4">
+    {sortedExhibitions.length > 0 ? (
+      <ul class="list-none p-0">
         {sortedExhibitions.map((exhibition) => (
-          <li class="exhibition-item">
-            {exhibition.data.image && (
-              <div class="exhibition-image">
-                <img src={resolveImagePath(exhibition.data.image)} alt={exhibition.data.title} />
-              </div>
-            )}
-            <h4>{exhibition.data.title}</h4>
-            <p class="exhibition-venue">
-              <span class="venue">{exhibition.data.venue}</span>
-              {exhibition.data.location && <span class="location">, {exhibition.data.location}</span>}
+          <li class="py-4 border-b border-white/10 last:border-b-0">
+            <h3 class="font-zalando font-bold text-lg uppercase tracking-wider text-white">{exhibition.data.title}</h3>
+            <p class="text-sm mt-1">
+              <span class="font-semibold text-electric-magenta">{exhibition.data.venue}</span>
+              {exhibition.data.location && <span class="text-white/60">, {exhibition.data.location}</span>}
             </p>
-            <p class="exhibition-date">
+            <p class="text-sm text-white/60 mt-0.5">
               {new Date(exhibition.data.startDate).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
-              {exhibition.data.endDate && ` - ${new Date(exhibition.data.endDate).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}`}
+              {exhibition.data.endDate && ` — ${new Date(exhibition.data.endDate).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}`}
             </p>
             {exhibition.data.description && (
-              <p class="exhibition-description">{exhibition.data.description}</p>
+              <div class="text-sm leading-relaxed mt-2 text-white/80" set:html={renderMarkdown(exhibition.data.description)}></div>
             )}
           </li>
         ))}
       </ul>
-    </section>
-  </main>
+    ) : (
+      <p>No exhibitions to display.</p>
+    )}
+  </section>
+
+  <div class="section-divider"></div>
+
+  <section class="py-4 px-4">
+    <h2 class="font-zalando font-bold text-2xl uppercase tracking-wider mb-4 text-electric-magenta">Artist Biography</h2>
+    <p class="font-montserrat text-lg leading-relaxed max-w-[800px]">{fullBio}</p>
+  </section>
+<!-- 
+  <div class="section-divider"></div>
+
+  <section class="py-16 px-4">
+    <h2 class="font-zalando font-bold text-2xl uppercase tracking-wider mb-4 text-electric-magenta">Affiliations</h2>
+    {affiliations.length > 0 ? (
+      <ul class="list-none p-0">
+        {affiliations.map(affiliation => (
+          <li class="py-2 border-b border-white/10">{affiliation}</li>
+        ))}
+      </ul>
+    ) : (
+      <p>Affiliation information coming soon.</p>
+    )}
+  </section>
+  -->
 </BaseLayout>

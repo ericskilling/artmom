@@ -5,6 +5,7 @@ location: "Edmonton, Alberta"
 startDate: "2022-07-01"
 endDate: "2022-07-01"
 featured: false
+exhibitionImage: ../../assets/images/Artists-Choice-2023.png
 description: "A series of art about the balance of caregiving. 'Modern Love; Mother Care' explores 'Mother Care', which encompasses both the care directed towards others and the essential care for oneself."
 ---
 

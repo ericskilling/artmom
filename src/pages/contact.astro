@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const contactCollection = await getCollection('contact');
+const contactData = contactCollection[0]?.data;
+
+const leadIn = contactData?.lead_in || [];
+const email = contactData?.email || '';
+const instagramHandle = contactData?.instagram_handle || '';
+const instagramUrl = contactData?.instagram_url || '';
+const inquiryTypes = contactData?.inquiry_types || [];
+---
+
+<BaseLayout 
+  title="Contact - Rachelle Ymay Skilling" 
+  description="Get in touch for workshops, art purchases, or collaborations"
+  currentPage="contact"
+>
+  <section class="text-centerbg-royal-cobalt relative overflow-visible text-white z-10">
+    
+    <div class="relative z-10 max-w-[1000px] mx-auto bg-royal-cobalt/70 p-4">
+      <h1 class="font-zalando font-bold text-4xl uppercase tracking-wider">Get in Touch</h1>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <section class="py-4 px-4">
+    <div class="lead-in">
+      {leadIn.map((paragraph) => (
+        <p class="text-lg leading-relaxed mb-4">{paragraph}</p>
+      ))}
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <section class="py-4 px-4">
+    <h2 class="font-zalando font-bold text-2xl uppercase tracking-wider mb-4 text-electric-magenta">Send a Message</h2>
+    
+    <form name="contact" method="POST" data-netlify="true" class="flex flex-col gap-6 max-w-[600px]">
+      <div class="flex flex-col gap-2">
+        <label for="name" class="text-sm font-semibold">Name *</label>
+        <input type="text" id="name" name="name" required class="text-base p-3 border-2 border-white/30 bg-black/20 text-white outline-none focus:border-electric-magenta" />
+      </div>
+      
+      <div class="flex flex-col gap-2">
+        <label for="email" class="text-sm font-semibold">Email *</label>
+        <input type="email" id="email" name="email" required class="text-base p-3 border-2 border-white/30 bg-black/20 text-white outline-none focus:border-electric-magenta" />
+      </div>
+      
+      <div class="flex flex-col gap-2">
+        <label for="organization" class="text-sm font-semibold">Organization (optional)</label>
+        <input type="text" id="organization" name="organization" class="text-base p-3 border-2 border-white/30 bg-black/20 text-white outline-none focus:border-electric-magenta" />
+      </div>
+      
+      <div class="flex flex-col gap-2">
+        <label for="inquiry-type" class="text-sm font-semibold">Inquiry Type *</label>
+        <select id="inquiry-type" name="inquiry-type" required class="text-base p-3 border-2 border-white/30 bg-black/20 text-white outline-none focus:border-electric-magenta appearance-none bg-[length:0.65rem_auto] bg-[right_1rem_center] bg-no-repeat" style="background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FF1493%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");">
+          <option value="">Select an option</option>
+          {inquiryTypes.map((type) => (
+            <option value={type.value} class="bg-royal-cobalt text-white">{type.label}</option>
+          ))}
+        </select>
+      </div>
+      
+      <div class="flex flex-col gap-2">
+        <label for="message" class="text-sm font-semibold">Message *</label>
+        <textarea id="message" name="message" rows="5" required class="text-base p-3 border-2 border-white/30 bg-black/20 text-white outline-none focus:border-electric-magenta"></textarea>
+      </div>
+      
+      <button type="submit" class="btn btn-primary self-start">Send Message</button>
+    </form>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <section class="py-16 px-4">
+    <h2 class="font-zalando font-bold text-2xl uppercase tracking-wider mb-4 text-electric-magenta">Contact Information</h2>
+    
+    <div class="mb-6">
+      <h3 class="font-zalando font-bold text-xl uppercase tracking-wider mb-2">Email</h3>
+      <p class="text-base"><a href={`mailto:${email}`} class="text-electric-magenta no-underline hover:underline">{email}</a></p>
+    </div>
+    
+    <div class="mb-6">
+      <h3 class="font-zalando font-bold text-xl uppercase tracking-wider mb-2">Instagram</h3>
+      <p class="text-base"><a href={instagramUrl} target="_blank" class="text-electric-magenta no-underline hover:underline">{instagramHandle}</a></p>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="2000" viewBox="0 0 2000 2000">
+  <!-- 
+    Scattered diagonal strokes simulating hand-drawn lines.
+    Translates the CSS gradient-based strokes into SVG lines.
+  -->
+  <defs>
+    <style>
+      .m { stroke: #FF1493; stroke-opacity: 0.12; stroke-width: 3; stroke-linecap: square; }
+      .t { stroke: #FF8C00; stroke-opacity: 0.10; stroke-width: 3; stroke-linecap: square; }
+      .l { stroke: #DFFF00; stroke-opacity: 0.08; stroke-width: 3; stroke-linecap: square; }
+      .c { stroke: #002366; stroke-opacity: 0.10; stroke-width: 3; stroke-linecap: square; }
+      .r { stroke: #8B4513; stroke-opacity: 0.09; stroke-width: 3; stroke-linecap: square; }
+      .m2 { stroke: #FF1493; stroke-opacity: 0.10; stroke-width: 3; stroke-linecap: square; }
+      .t2 { stroke: #FF8C00; stroke-opacity: 0.11; stroke-width: 3; stroke-linecap: square; }
+      .l2 { stroke: #DFFF00; stroke-opacity: 0.09; stroke-width: 3; stroke-linecap: square; }
+      .c2 { stroke: #002366; stroke-opacity: 0.08; stroke-width: 3; stroke-linecap: square; }
+      .m3 { stroke: #FF1493; stroke-opacity: 0.07; stroke-width: 3; stroke-linecap: square; }
+      .t3 { stroke: #FF8C00; stroke-opacity: 0.08; stroke-width: 3; stroke-linecap: square; }
+    </style>
+  </defs>
+  <!-- Row 1 -->
+  <line class="m" x1="0" y1="0" x2="160" y2="60" />
+  <line class="t" x1="160" y1="0" x2="360" y2="40" />
+  <line class="l" x1="360" y1="0" x2="500" y2="50" />
+  <line class="m2" x1="560" y1="0" x2="740" y2="45" />
+  <line class="r" x1="760" y1="0" x2="980" y2="55" />
+  <line class="t2" x1="960" y1="0" x2="1120" y2="40" />
+  <line class="c" x1="1160" y1="0" x2="1360" y2="55" />
+  <line class="m" x1="1360" y1="0" x2="1500" y2="40" />
+  <line class="l2" x1="1560" y1="0" x2="1740" y2="50" />
+  <line class="m3" x1="1760" y1="0" x2="1920" y2="45" />
+  
+  <!-- Row 2 -->
+  <line class="c2" x1="100" y1="240" x2="280" y2="300" />
+  <line class="t" x1="300" y1="200" x2="460" y2="250" />
+  <line class="m" x1="500" y1="280" x2="640" y2="320" />
+  <line class="l" x1="700" y1="220" x2="900" y2="270" />
+  <line class="r" x1="900" y1="260" x2="1080" y2="310" />
+  <line class="t2" x1="1100" y1="200" x2="1260" y2="255" />
+  <line class="c" x1="1300" y1="300" x2="1440" y2="340" />
+  <line class="m" x1="1500" y1="240" x2="1700" y2="290" />
+  <line class="l2" x1="1700" y1="280" x2="1880" y2="330" />
+  
+  <!-- Row 3 -->
+  <line class="m" x1="0" y1="500" x2="220" y2="560" />
+  <line class="t2" x1="200" y1="440" x2="360" y2="490" />
+  <line class="c2" x1="400" y1="560" x2="540" y2="610" />
+  <line class="m2" x1="600" y1="480" x2="800" y2="530" />
+  <line class="l" x1="800" y1="520" x2="980" y2="570" />
+  <line class="r" x1="1000" y1="460" x2="1160" y2="510" />
+  <line class="t" x1="1200" y1="540" x2="1340" y2="590" />
+  <line class="c" x1="1400" y1="500" x2="1600" y2="550" />
+  <line class="m" x1="1600" y1="560" x2="1780" y2="610" />
+  <line class="l2" x1="1800" y1="480" x2="1960" y2="530" />
+  
+  <!-- Row 4 (large span) -->
+  <line class="m3" x1="-80" y1="600" x2="1100" y2="680" />
+  <line class="t" x1="900" y1="700" x2="2000" y2="770" />
+  <line class="c2" x1="0" y1="1400" x2="1100" y2="1460" />
+  <line class="m2" x1="900" y1="1500" x2="2000" y2="1570" />
+  <line class="r" x1="-50" y1="900" x2="1000" y2="960" />
+  <line class="t3" x1="900" y1="1000" x2="2000" y2="1060" />
+  
+  <!-- Bottom rows -->
+  <line class="t" x1="0" y1="1400" x2="180" y2="1460" />
+  <line class="c2" x1="240" y1="1440" x2="400" y2="1500" />
+  <line class="m" x1="440" y1="1360" x2="580" y2="1420" />
+  <line class="l" x1="640" y1="1480" x2="800" y2="1540" />
+  <line class="r" x1="840" y1="1420" x2="1000" y2="1480" />
+  <line class="t" x1="1040" y1="1460" x2="1200" y2="1520" />
+  <line class="c" x1="1240" y1="1380" x2="1400" y2="1440" />
+  <line class="m2" x1="1440" y1="1500" x2="1600" y2="1560" />
+  <line class="l2" x1="1640" y1="1440" x2="1800" y2="1500" />
+  <line class="t" x1="1840" y1="1400" x2="2000" y2="1460" />
+  
+  <!-- Final row -->
+  <line class="m" x1="0" y1="1700" x2="200" y2="1760" />
+  <line class="c" x1="200" y1="1760" x2="360" y2="1820" />
+  <line class="t2" x1="400" y1="1720" x2="580" y2="1780" />
+  <line class="l" x1="600" y1="1800" x2="740" y2="1860" />
+  <line class="r" x1="800" y1="1740" x2="960" y2="1800" />
+  <line class="m" x1="1000" y1="1780" x2="1200" y2="1840" />
+  <line class="c2" x1="1200" y1="1700" x2="1380" y2="1760" />
+  <line class="t" x1="1400" y1="1820" x2="1560" y2="1880" />
+  <line class="m2" x1="1600" y1="1760" x2="1760" y2="1820" />
+  <line class="l2" x1="1800" y1="1720" x2="1960" y2="1780" />
+</svg>

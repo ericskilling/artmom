@@ -1,185 +1,147 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+import { resolveImagePath } from '../lib/images';
+import { renderMarkdown } from '../lib/markdown';
 
 const artworks = await getCollection('artworks');
+const comics = await getCollection('comics');
+const allPublications = await getCollection('publications');
+const portfolioCollection = await getCollection('portfolio');
+const portfolioData = portfolioCollection[0]?.data || {};
+
 const sortedArtworks = artworks.sort((a, b) => parseInt(b.data.year) - parseInt(a.data.year));
+const featuredComics = comics.filter(c => c.data.featured);
+const featuredPublications = portfolioData.featured_publications || [];
+const artHeading = portfolioData.art_heading || 'Art';
+const artIntro = portfolioData.art_intro;
+const comicsHeading = portfolioData.comics_heading || 'Graphic Narratives & Zines';
+const comicsIntro = portfolioData.comics_intro;
+const featuredPublicationsHeading = portfolioData.featured_publications_heading || 'Featured Publications';
+const publicationsHeading = portfolioData.publications_heading || 'Publications';
+const publicationsIntro = portfolioData.publications_intro;
+const ctaText = portfolioData.cta_text;
+const ctaButtonText = portfolioData.cta_button_text;
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Portfolio - Rachelle Ymay Skilling</title>
-    <meta name="description" content="Portfolio of artworks by Rachelle Ymay Skilling" />
-  </head>
-  <body>
-    <header>
-      <nav>
-        <h1>Rachelle Ymay Skilling</h1>
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="/portfolio">Portfolio</a></li>
-          <li><a href="/exhibitions">Exhibitions</a></li>
-        </ul>
-      </nav>
-    </header>
+<BaseLayout 
+  title="Portfolio - Rachelle Ymay Skilling" 
+  description="Visual Arts & Graphic Narratives"
+  currentPage="portfolio"
+>
+  <section class="text-center bg-royal-cobalt relative overflow-visible text-white z-10">
 
-    <main>
-      <h2>Portfolio</h2>
-      <p class="intro">A selection of artworks from 2018 to present.</p>
+    
+    <div class="relative z-10 max-w-[1000px] mx-auto bg-royal-cobalt/70 p-4">
+      <h1 class="font-zalando font-bold text-4xl uppercase tracking-wider">{artHeading}</h1>
+    </div>
+  </section>
 
-      <div class="artwork-grid">
-        {sortedArtworks.map((artwork) => (
-          <article class="artwork-card">
-            <h3>{artwork.data.title}</h3>
-            <div class="artwork-meta">
-              <span class="year">{artwork.data.year}</span>
-              <span class="medium">{artwork.data.medium}</span>
+  <div class="section-divider"></div>
+
+  <!-- Art Section -->
+  <section class="py-4 px-4">
+    <h2 class="font-zalando font-bold text-2xl uppercase tracking-wider mb-4 text-electric-magenta">Art</h2>
+    <p class="font-montserrat text-lg leading-relaxed mb-8 max-w-[800px]">{artIntro}</p>
+    
+    <div class="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-8">
+      {sortedArtworks.map((artwork) => (
+        <article class="border-2 border-white/20 overflow-hidden">
+          {artwork.data.artworkImage ? (
+            <div class="w-full aspect-square overflow-hidden">
+              <img src={resolveImagePath(artwork.data.artworkImage)} alt={artwork.data.title} class="w-full h-full object-cover" />
             </div>
-            {artwork.data.dimensions && (
-              <p class="dimensions">{artwork.data.dimensions}</p>
-            )}
+          ) : (
+            <div class="w-full aspect-square bg-[url('/assets/images/grey-placeholder.png')] bg-cover bg-center"></div>
+          )}
+          <div class="p-4">
+            <h3 class="font-zalando font-bold text-xl uppercase tracking-wider mb-2">{artwork.data.title}</h3>
+            <p class="text-sm text-electric-magenta">{artwork.data.year} | {artwork.data.medium}</p>
+            {artwork.data.size && <p class="text-sm mt-1">{artwork.data.size}</p>}
             {artwork.data.description && (
-              <p class="description">{artwork.data.description}</p>
+              <p class="text-sm leading-relaxed mt-3">{artwork.data.description}</p>
             )}
-          </article>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- Graphic Narratives & Zines Section -->
+  <section class="py-4 px-4">
+    <h2 class="font-zalando font-bold text-2xl uppercase tracking-wider mb-4 text-electric-magenta">{comicsHeading}</h2>
+    <p class="font-montserrat text-lg leading-relaxed mb-8 max-w-[800px]">{comicsIntro}</p>
+    
+    <div class="mb-8">
+      <h3 class="font-zalando font-bold text-xl uppercase tracking-wider mb-4 text-white">{featuredPublicationsHeading}</h3>
+      <ul class="list-none p-0 flex flex-wrap gap-4">
+        {featuredPublications.map(pub => (
+          <li class="font-zalando font-bold text-base px-4 py-2 border-2 border-electric-magenta bg-electric-magenta/10">{pub}</li>
         ))}
-      </div>
-    </main>
+      </ul>
+    </div>
 
-    <footer>
-      <p>&copy; {new Date().getFullYear()} Rachelle Ymay Skilling. All rights reserved.</p>
-    </footer>
-  </body>
-</html>
+    <div class="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-8">
+      {featuredComics.map((comic) => (
+        <article class="border-2 border-white/20 overflow-hidden">
+          {comic.data.comicImage ? (
+            <div class="w-full aspect-square overflow-hidden">
+              <img src={resolveImagePath(comic.data.comicImage)} alt={comic.data.title} class="w-full h-full object-cover" />
+            </div>
+          ) : (
+            <div class="w-full aspect-square bg-[url('/assets/images/grey-placeholder.png')] bg-cover bg-center"></div>
+          )}
+          <div class="p-4">
+            <h3 class="font-zalando font-bold text-xl uppercase tracking-wider mb-2">{comic.data.title}</h3>
+            <p class="text-sm text-electric-magenta">{comic.data.year} | {comic.data.format}</p>
+            {comic.data.description && (
+              <p class="text-sm leading-relaxed mt-3">{comic.data.description}</p>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
 
-<style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+  <div class="section-divider"></div>
 
-  body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background: #fafafa;
-  }
+  <!-- Publications Section -->
+  <section class="py-4 px-4">
+    <h2 class="font-zalando font-bold text-2xl uppercase tracking-wider mb-4 text-electric-magenta">{publicationsHeading}</h2>
+    <p class="font-montserrat text-lg leading-relaxed mb-8 max-w-[800px]">{publicationsIntro}</p>
+    
+    <div class="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-8">
+      {allPublications.length > 0 ? allPublications.map((pub) => (
+        <article class="border-2 border-white/20 overflow-hidden p-6">
+          {pub.data.url ? (
+            <h3 class="font-zalando font-bold text-xl uppercase tracking-wider mb-2">
+              <a href={pub.data.url} target="_blank" class="text-white hover:text-electric-magenta underline">{pub.data.title}</a>
+            </h3>
+          ) : (
+            <h3 class="font-zalando font-bold text-xl uppercase tracking-wider mb-2">{pub.data.title}</h3>
+          )}
+          {pub.data.publisher && <p class="text-sm text-electric-magenta">{pub.data.publisher}</p>}
+          {pub.data.year && <p class="text-sm text-white/60 mb-2">{pub.data.year}</p>}
+          {pub.data.description && (
+            <div class="text-sm leading-relaxed mt-3" set:html={renderMarkdown(pub.data.description)}></div>
+          )}
+          {pub.data.url && (
+            <a href={pub.data.url} target="_blank" class="inline-block mt-4 text-sm text-electric-magenta underline hover:text-vivid-tangerine">Read More</a>
+          )}
+        </article>
+      )) : (
+        <p>No publications available yet.</p>
+      )}
+    </div>
+  </section>
 
-  header {
-    padding: 2rem;
-    background: #fff;
-    border-bottom: 1px solid #eee;
-  }
+  <div class="section-divider"></div>
 
-  nav {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-  nav h1 {
-    font-size: 1.5rem;
-    font-weight: 600;
-  }
-
-  nav ul {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-  }
-
-  nav a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-  }
-
-  nav a:hover {
-    color: #666;
-  }
-
-  main {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 3rem 2rem;
-  }
-
-  h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-
-  .intro {
-    color: #666;
-    margin-bottom: 3rem;
-  }
-
-  .artwork-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem;
-  }
-
-  .artwork-card {
-    background: #fff;
-    padding: 1.5rem;
-    border: 1px solid #eee;
-    border-radius: 8px;
-  }
-
-  .artwork-card h3 {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-  }
-
-  .artwork-meta {
-    display: flex;
-    gap: 1rem;
-    color: #666;
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .year {
-    font-weight: 500;
-  }
-
-  .dimensions {
-    color: #888;
-    font-size: 0.9rem;
-    font-style: italic;
-    margin-bottom: 1rem;
-  }
-
-  .description {
-    color: #555;
-    font-size: 0.95rem;
-    line-height: 1.6;
-  }
-
-  footer {
-    text-align: center;
-    padding: 2rem;
-    background: #fff;
-    border-top: 1px solid #eee;
-    color: #666;
-    font-size: 0.9rem;
-  }
-
-  @media (max-width: 768px) {
-    nav {
-      flex-direction: column;
-      text-align: center;
-    }
-  }
-</style>
+  <!-- CTA Section -->
+  <section class="text-center py-8">
+    <p class="mb-4">{ctaText}</p>
+    <a href="/facilitation" class="btn btn-primary">{ctaButtonText}</a>
+  </section>
+</BaseLayout>

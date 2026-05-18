@@ -1,12 +1,36 @@
 ---
 import '../styles/theme.css';
+import { SEO } from 'astro-seo';
+import { siteData } from '../config/seo';
+import Sidebar from '../components/Sidebar.astro';
 
 interface Props {
   title: string;
   description?: string;
+  image?: string;
+  noindex?: boolean;
+  currentPage?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, image, noindex, currentPage = 'home' } = Astro.props;
+
+const seoProps = {
+  ...siteData.default,
+  title,
+  description: description || siteData.default.description,
+  openGraph: {
+    basic: {
+      ...siteData.default.openGraph.basic,
+      title,
+      url: Astro.url.href,
+      ...(image && { image })
+    },
+    optional: {
+      ...siteData.default.openGraph.optional,
+      description: description || siteData.default.openGraph.optional.description
+    }
+  }
+};
 ---
 
 <!DOCTYPE html>
@@ -14,49 +38,37 @@ const { title, description } = Astro.props;
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{title}</title>
-  <meta name="description" content={description || "Contemporary Artist from Calgary, Alberta"} />
+  <link rel="canonical" href={Astro.url.href} />
+  <SEO {...seoProps} />
+  {noindex && <meta name="robots" content="noindex" />}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Zalando+Sans+Expanded:ital,wght@0,400;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Rachelle Ymay Skilling",
+      "jobTitle": "Contemporary Artist",
+      "description": "Bold. Geometric. Autobiographical.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Calgary",
+        "addressRegion": "Alberta",
+        "addressCountry": "Canada"
+      },
+      "sameAs": [
+        "https://www.instagram.com/rachelle_ymay_skilling/",
+        "mailto:Rachelleskilling@gmail.com"
+      ]
+    })}
+  </script>
 </head>
 <body>
-  <header>
-    <nav>
-      <h1><a href="/"><span>Rachelle</span> Ymay Skilling</a></h1>
-      <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <ul class="nav-links">
-        <li><a href="/about">About</a></li>
-        <li><a href="/art">Art</a></li>
-        <li><a href="/workshops">Workshops</a></li>
-        <li><a href="/comics">Comics</a></li>
-        <li><a href="/exhibitions">Exhibitions</a></li>
-        <li><a href="/publications">Publications</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <slot />
-
-  <footer>
-    <p>Follow on <a href="https://www.instagram.com/rachelle_ymay_skilling/" target="_blank">Instagram</a></p>
-    <p>Email: <a href="mailto:canada.art.mom@gmail.com">canada.art.mom@gmail.com</a></p>
-  </footer>
-
-  <script>
-    const toggle = document.querySelector('.mobile-menu-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    if (toggle && navLinks) {
-      toggle.addEventListener('click', () => {
-        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
-        toggle.setAttribute('aria-expanded', (!isOpen).toString());
-        navLinks.classList.toggle('open');
-      });
-    }
-  </script>
+  <Sidebar currentPage={currentPage} />
+  
+  <main class="main-content">
+    <slot />
+  </main>
 </body>
 </html>

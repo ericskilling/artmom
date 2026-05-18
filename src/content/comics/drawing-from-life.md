@@ -2,8 +2,8 @@
 title: Drawing from Life
 year: '2024'
 format: Graphic Story Series
-comicImage: ../../assets/images/comicImage
 featured: true
+comicImage: ../../assets/images/drawing-from-life.jpg
 description: ART MOM series - visual stories about everyday moments of motherhood.
 ---
 

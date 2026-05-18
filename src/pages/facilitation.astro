@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { resolveImagePath } from '../lib/images';
+import { renderMarkdown } from '../lib/markdown';
+
+const facilitations = await getCollection('facilitations');
+const facilitationData = facilitations[0]?.data;
+
+const heroImage = resolveImagePath(facilitationData?.hero_image, '');
+const workshops = await getCollection('facilitationWorkshops');
+const partners = facilitationData?.partners || [];
+const logistics = facilitationData?.logistics || '';
+const takeawayHeading = facilitationData?.takeaway_heading || '';
+const takeawayDescription = facilitationData?.takeaway_description || '';
+const ctaButtonText = facilitationData?.cta_button_text || '';
+---
+
+<BaseLayout 
+  title="Art Facilitation - Rachelle Ymay Skilling" 
+  description={facilitationData?.hero_title}
+  currentPage="facilitation"
+>
+  <section class="text-center bg-royal-cobalt relative overflow-visible text-white z-10">
+     <div class="relative z-10 max-w-[1000px] mx-auto bg-royal-cobalt/70 p-4">
+      <h1 class="font-zalando font-bold text-4xl uppercase tracking-wider">{facilitationData?.hero_title}</h1>
+    </div>
+      <div class="section-divider"></div>
+
+    {heroImage && (
+      <div class="w-full overflow-hidden mb-2 p-4">
+        <img src={heroImage} alt="Rachelle Ymay Skilling" class="w-full h-[280px] object-cover" />
+      </div>
+    )}
+    
+   
+  </section>
+
+
+  <section class="py-4 px-4">
+    <!-- <h2 class="font-zalando font-bold text-2xl uppercase tracking-wider mb-4 text-electric-magenta">Facilitator Statement</h2>-->
+    <div class="prose prose-invert max-w-none markdown-content" set:html={renderMarkdown(facilitationData?.facilitator_statement)}></div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <section class="py-4 px-4">
+   <!--  <h2 class="font-zalando font-bold text-2xl uppercase tracking-wider mb-4 text-electric-magenta">Workshops</h2>-->
+    
+    {workshops.map(({ data: workshop }) => {
+      const workshopImg = resolveImagePath(workshop.workshopImage, '');
+      return (
+        <article class="mb-8 p-6 border-2 border-white/20">
+          {workshopImg && (
+            <div class="mb-4 w-full">
+              <img src={workshopImg} alt={workshop.title} class="w-full h-auto object-cover rounded" />
+            </div>
+          )}
+          <h3 class="font-zalando font-bold text-xl uppercase tracking-wider mb-4 text-white">{workshop.title}</h3>
+          <p class="text-base leading-relaxed mb-4">{workshop.description}</p>
+          {workshop.audience && <p class="text-sm text-electric-magenta mb-4"><strong class="font-bold">Target Audience:</strong> {workshop.audience}</p>}
+          {workshop.cta_label && workshop.cta_link && (
+            <a href={workshop.cta_link} class="btn btn-primary mt-2 inline-block">{workshop.cta_label}</a>
+          )}
+        </article>
+      );
+    })}
+  </section>
+
+ 
+  <div class="section-divider"></div>
+
+  <section class="py-16 px-4">
+    <h2 class="font-zalando font-bold text-2xl uppercase tracking-wider mb-4 text-electric-magenta">Institutional Partners</h2>
+    <ul class="list-none p-0 flex flex-wrap gap-4">
+      {partners.map(partner => (
+        <li class="font-zalando font-bold text-base px-4 py-2 border-2 border-electric-magenta bg-electric-magenta/10">{partner}</li>
+      ))}
+    </ul>
+  </section>
+
+  <div class="section-divider"></div>
+<!-- 
+  <section class="text-center py-16 px-4">
+    <h2 class="font-zalando font-bold text-2xl uppercase tracking-wider mb-4 text-electric-magenta">{takeawayHeading}</h2>
+    <p class="mb-4">{takeawayDescription}</p>
+    {facilitationData?.takeaway_pdf && (
+      <a href={resolveImagePath(facilitationData.takeaway_pdf)} class="btn" download>Download PDF</a>
+    )}
+  </section>
+-->
+</BaseLayout>

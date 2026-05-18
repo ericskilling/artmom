@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { resolveImagePath } from '../lib/images';
+import { renderMarkdown } from '../lib/markdown';
+
+const classesCollection = await getCollection('classes');
+const classesData = classesCollection[0]?.data;
+
+const heroImage = resolveImagePath(classesData?.hero_image, '');
+const classList = await getCollection('facilitationClasses');
+const email = classesData?.preregistration_email || '';
+const ctaButtonText = classesData?.cta_button_text || 'Pre-register Now';
+---
+
+<BaseLayout 
+  title="Online Classes - Rachelle Ymay Skilling" 
+  description={classesData?.title}
+  currentPage="classes"
+>
+  <section class="text-center bg-royal-cobalt relative overflow-visible text-white z-10">
+<div class="relative z-10 max-w-[1000px] mx-auto bg-royal-cobalt/70 p-4">
+      <h1 class="font-zalando font-bold text-4xl uppercase tracking-wider">{classesData?.title}</h1>
+    </div>
+  <div class="section-divider"></div>
+
+    {heroImage && (
+      <div class="w-full overflow-hidden mb-2 p-4">
+        <img src={heroImage} alt="Rachelle Ymay Skilling" class="w-full h-[280px] object-cover" />
+      </div>
+    )}
+    
+    
+  </section>
+  <section class="py-4 px-4">
+    <!-- <h2 class="font-zalando font-bold text-2xl uppercase tracking-wider mb-4 text-electric-magenta">Instructor Statement</h2>-->
+    <div class="prose prose-invert max-w-none markdown-content" set:html={renderMarkdown(classesData?.statement)}></div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <section class="py-4 px-4">
+    {classList.map(entry => {
+      const cls = entry.data;
+      const classImage = resolveImagePath(cls.image, '');
+      const classBody = typeof entry.body === 'string' ? entry.body : '';
+      const classFormat = cls.format || classesData?.class_details;
+      const classLogistics = cls.logistics || classesData?.logistics;
+      const classDetailsHtml = classBody
+        ? renderMarkdown(classBody)
+        : renderMarkdown(
+            `## Format\n${classFormat || ''}\n\n## Logistics\n${classLogistics || ''}`
+          );
+      return (
+        <article class="mb-8 p-6 border-2 border-white/20">
+          <div class="mb-4 w-full">
+            <img src={classImage} alt={cls.title} class="w-full h-48 object-cover rounded" />
+          </div>
+          <h2 class="font-zalando font-bold text-xl uppercase tracking-wider mb-4 text-white">{cls.title}</h2>
+          <h3 class="font-zalando font-bold text-base uppercase tracking-wider mb-3 text-electric-magenta">What you'll learn</h3>
+          <ul class="list-disc pl-6 space-y-1">
+            {cls.what_youll_learn?.map(topic => (
+              <li class="text-base leading-relaxed">{topic}</li>
+            ))}
+          </ul>
+          <div class="mt-6">
+            <div class="prose prose-invert max-w-none markdown-content" set:html={classDetailsHtml}></div>
+          </div>
+          <div class="text-center mt-6">
+            <p class="mb-4">Interested? Pre-register now!</p>
+            <a href={`mailto:${email}?subject=Online%20Classes%20Pre-registration`} class="btn btn-primary">{ctaButtonText}</a>
+          </div>
+        </article>
+      );
+    })}
+  </section>
+</BaseLayout>

@@ -1,165 +1,35 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { resolveImagePath } from '../lib/images';
 
-const artworks = await getCollection('artworks');
-const exhibitions = await getCollection('exhibitions');
-const comics = await getCollection('comics');
-const workshops = await getCollection('workshops');
 const artist = await getCollection('artist');
 const artistInfo = artist[0]?.data || {};
 
-const sortedArtworks = artworks.sort((a, b) => parseInt(b.data.year) - parseInt(a.data.year)).slice(0, 3);
-const sortedExhibitions = exhibitions.sort((a, b) => new Date(b.data.startDate).getTime() - new Date(a.data.startDate).getTime()).slice(0, 3);
-const featuredComics = comics.filter(c => c.data.featured);
-const upcomingWorkshops = workshops.filter(w => !w.data.past).sort((a, b) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime());
-
-function resolveImagePath(path) {
-  if (!path) return path;
-  if (typeof path === 'object' && path !== null) {
-    path = path.url || path.path || path.src || '';
-  }
-  if (typeof path !== 'string') return path;
-  if (path.startsWith('/assets/')) {
-    return '../../' + path;
-  }
-  return path;
-}
+const heroImage = resolveImagePath(artistInfo.heroImagePath, '');
+const bioText = artistInfo.bio || '';
 ---
 
-<BaseLayout title="Rachelle Ymay Skilling - Contemporary Artist" description={artistInfo.tagline || "Contemporary Artist from Calgary, Alberta"}>
-  <main>
-    <section class="hero" id="home">
-      <div class="hero-content">
-        {/* <h2><span>{artistInfo.tagline || 'Contemporary Artist'}</span> Calgary, Alberta</h2> */}
-        {/* <p class="tagline">Bold. Geometric. Autobiographical.</p> */}
-        
-        {artistInfo.heroImagePath && (
-          <div class="hero-artwork">
-            <img src={resolveImagePath(artistInfo.heroImagePath)} alt="Rachelle Ymay Skilling" />
-          </div>
-        )}
-        
-        <p class="bio-preview">{artistInfo.bio}</p>
+<BaseLayout 
+  title="Rachelle Ymay Skilling - Contemporary Artist" 
+  description={artistInfo.tagline}
+  currentPage="home"
+>
+  <section class="text-center bg-royal-cobalt relative overflow-visible text-white z-10">
+    {heroImage && (
+      <div class="w-full border-4 border-[#FF1493]">
+        <img src={heroImage} alt="Rachelle Ymay Skilling in her studio" class="w-full h-full object-cover" />
       </div>
-    </section>
-
+    )}
     
-
-    <div class="section-divider"></div>
-
-    <section id="workshops">
-      <h3>Workshops</h3>
-      {upcomingWorkshops.length > 0 ? (
-        <ul class="exhibition-list">
-          {upcomingWorkshops.slice(0, 1).map((workshop) => (
-            <li class="exhibition-item">
-              <h4>{workshop.data.title}</h4>
-              <p class="exhibition-venue">
-                {workshop.data.organization && <span class="venue">{workshop.data.organization}</span>}
-                {workshop.data.location && <span class="location">, {workshop.data.location}</span>}
-              </p>
-              <p class="exhibition-date">
-                {new Date(workshop.data.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
-                {workshop.data.time && ` - ${workshop.data.time}`}
-              </p>
-              {workshop.data.description && (
-                <p class="exhibition-description">{workshop.data.description}</p>
-              )}
-              {workshop.data.registerUrl && (
-                <a href={workshop.data.registerUrl} class="btn" target="_blank">Register</a>
-              )}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No upcoming workshops at this time.</p>
-      )}
-    </section>
-
-    <div class="section-divider"></div>
-
-    <section id="portfolio">
-      <h3>Recent Work</h3>
-      <div class="artwork-grid">
-        {sortedArtworks.map((artwork, index) => (
-          <article class={`artwork-card artwork-card-${index + 1}`}>
-            <div class="card-accent-top"></div>
-            {artwork.data.artworkImage ? (
-              <div class="artwork-image-wrap">
-                <img src={resolveImagePath(artwork.data.artworkImage)} alt={artwork.data.title} />
-              </div>
-            ) : (
-              <div class="artwork-image-wrap artwork-placeholder">
-                <div class="placeholder-pattern"></div>
-              </div>
-            )}
-            <div class="card-content">
-              <h4>{artwork.data.title}</h4>
-              <p class="artwork-year">{artwork.data.year}</p>
-              <p class="artwork-medium">{artwork.data.medium}</p>
-            </div>
-            <div class="card-accent-bottom"></div>
-          </article>
-        ))}
+    <div class="relative z-10 max-w-[1000px] mx-auto bg-royal-cobalt/70 p-12">
+      <h1 class="font-zalando font-bold text-4xl uppercase tracking-wider mb-6 text-white">Rachelle Ymay Skilling</h1>
+      <p class="font-montserrat text-lg leading-relaxed mb-8 max-w-[800px]">{bioText}</p>
+      
+      <div class="flex gap-4 flex-wrap">
+        <a href="/facilitation" class="btn btn-primary">View Workshops</a>
+        <a href="/portfolio" class="btn btn-secondary">Browse Artwork</a>
       </div>
-      <div style="text-align: center; margin-top: 3rem;">
-        <a href="/art" class="view-all">View Full Portfolio</a>
-      </div>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <section id="comics">
-      <h3>Comics</h3>
-      <div class="artwork-grid">
-        {featuredComics.map((comic, index) => (
-          <article class={`artwork-card artwork-card-${index + 1}`}>
-            <div class="card-accent-top"></div>
-            {comic.data.comicImage ? (
-              <div class="artwork-image-wrap">
-                <img src={resolveImagePath(comic.data.comicImage)} alt={comic.data.title} />
-              </div>
-            ) : (
-              <div class="artwork-image-wrap artwork-placeholder">
-                <div class="placeholder-pattern"></div>
-              </div>
-            )}
-            <div class="card-content">
-              <h4>{comic.data.title}</h4>
-              <p class="artwork-year">{comic.data.year}</p>
-              <p class="artwork-medium">{comic.data.format}</p>
-            </div>
-            <div class="card-accent-bottom"></div>
-          </article>
-        ))}
-      </div>
-      <div style="text-align: center; margin-top: 3rem;">
-        <a href="/comics" class="view-all">View All Comics</a>
-      </div>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <section id="exhibitions">
-      <h3>Exhibitions</h3>
-      <ul class="exhibition-list">
-        {sortedExhibitions.map((exhibition) => (
-          <li class="exhibition-item">
-            <h4>{exhibition.data.title}</h4>
-            <p class="exhibition-venue">
-              <span class="venue">{exhibition.data.venue}</span>
-              {exhibition.data.location && <span class="location">, {exhibition.data.location}</span>}
-            </p>
-            <p class="exhibition-date">
-              {new Date(exhibition.data.startDate).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
-            </p>
-          </li>
-        ))}
-      </ul>
-      <div style="text-align: center; margin-top: 3rem;">
-        <a href="/exhibitions" class="view-all">View All Exhibitions</a>
-      </div>
-    </section>
-  </main>
+    </div>
+  </section>
 </BaseLayout>

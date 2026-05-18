@@ -6,24 +6,22 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-    "prebuild": "node scripts/fix-image-paths.js",
-    "dev": "astro dev --port 3000",
-    "build": "astro build",
-    "build:prod": "astro build",
+    "sync:images": "rsync -ar --delete src/assets/images/ public/assets/images/",
+    "dev": "npm run sync:images && astro dev --port 3000",
+    "build": "npm run sync:images && astro build",
+    "build:prod": "npm run sync:images && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^13.0.0",
-    "@astrojs/react": "^4.2.0",
-    "astro": "^6.1.8",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "astro-loader-sveltia-cms": "^0.1.5"
+    "@astrojs/sitemap": "^3.7.2",
+    "@tailwindcss/vite": "^4.3.0",
+    "astro": "^6.3.3",
+    "astro-seo": "^1.1.0",
+    "marked": "^18.0.3",
+    "tailwindcss": "^4.3.0"
   },
   "devDependencies": {
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
     "typescript": "^5.0.0"
   }
 }

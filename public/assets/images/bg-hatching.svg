@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <defs>
+    <!-- 45° magenta hatch -->
+    <pattern id="hatch-45" patternUnits="userSpaceOnUse" width="27" height="27" patternTransform="rotate(45)">
+      <line x1="0" y1="25" x2="0" y2="27" stroke="#FF1493" stroke-opacity="0.05" stroke-width="2"/>
+    </pattern>
+    <!-- -45° cobalt hatch -->
+    <pattern id="hatch-45neg" patternUnits="userSpaceOnUse" width="27" height="27" patternTransform="rotate(-45)">
+      <line x1="0" y1="25" x2="0" y2="27" stroke="#002366" stroke-opacity="0.04" stroke-width="2"/>
+    </pattern>
+    <!-- 75° tangerine hatch -->
+    <pattern id="hatch-75" patternUnits="userSpaceOnUse" width="37" height="37" patternTransform="rotate(75)">
+      <line x1="0" y1="35" x2="0" y2="37" stroke="#FF8C00" stroke-opacity="0.03" stroke-width="2"/>
+    </pattern>
+    <!-- -75° terracotta hatch -->
+    <pattern id="hatch-75neg" patternUnits="userSpaceOnUse" width="37" height="37" patternTransform="rotate(-75)">
+      <line x1="0" y1="35" x2="0" y2="37" stroke="#8B4513" stroke-opacity="0.03" stroke-width="2"/>
+    </pattern>
+    <!-- 15° lemon-lime hatch -->
+    <pattern id="hatch-15" patternUnits="userSpaceOnUse" width="42" height="42" patternTransform="rotate(15)">
+      <line x1="0" y1="40" x2="0" y2="42" stroke="#DFFF00" stroke-opacity="0.025" stroke-width="2"/>
+    </pattern>
+    <!-- -15° magenta hatch -->
+    <pattern id="hatch-15neg" patternUnits="userSpaceOnUse" width="42" height="42" patternTransform="rotate(-15)">
+      <line x1="0" y1="40" x2="0" y2="42" stroke="#FF1493" stroke-opacity="0.025" stroke-width="2"/>
+    </pattern>
+  </defs>
+  <rect width="200" height="200" fill="url(#hatch-45)"/>
+  <rect width="200" height="200" fill="url(#hatch-45neg)"/>
+  <rect width="200" height="200" fill="url(#hatch-75)"/>
+  <rect width="200" height="200" fill="url(#hatch-75neg)"/>
+  <rect width="200" height="200" fill="url(#hatch-15)"/>
+  <rect width="200" height="200" fill="url(#hatch-15neg)"/>
+</svg>

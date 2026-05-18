@@ -5,6 +5,7 @@ location: "Calgary, Alberta"
 startDate: "2025-09-01"
 endDate: "2025-12-05"
 featured: false
+exhibitionImage: ../../assets/images/Seasons-of-the-Bow.jpg
 description: "A series of art about the balance of caregiving. 'Modern Love; Mother Care' explores 'Mother Care', which encompasses both the care directed towards others and the essential care for oneself."
 ---
 

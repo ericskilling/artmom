@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="2000" viewBox="0 0 2000 2000">
+  <!-- 
+    More opaque scattered diagonal strokes for blue section backgrounds.
+  -->
+  <defs>
+    <style>
+      .m { stroke: #FF1493; stroke-opacity: 0.55; stroke-width: 3; stroke-linecap: square; }
+      .t { stroke: #FF8C00; stroke-opacity: 0.55; stroke-width: 3; stroke-linecap: square; }
+      .l { stroke: #DFFF00; stroke-opacity: 0.50; stroke-width: 3; stroke-linecap: square; }
+      .c { stroke: #002366; stroke-opacity: 0.50; stroke-width: 3; stroke-linecap: square; }
+      .r { stroke: #8B4513; stroke-opacity: 0.50; stroke-width: 3; stroke-linecap: square; }
+      .m2 { stroke: #FF1493; stroke-opacity: 0.60; stroke-width: 3; stroke-linecap: square; }
+      .t2 { stroke: #FF8C00; stroke-opacity: 0.60; stroke-width: 3; stroke-linecap: square; }
+    </style>
+  </defs>
+  <!-- Short scattered lines -->
+  <line class="m" x1="100" y1="200" x2="180" y2="230" />
+  <line class="t" x1="300" y1="160" x2="400" y2="195" />
+  <line class="l" x1="500" y1="300" x2="570" y2="325" />
+  <line class="r" x1="1700" y1="240" x2="1790" y2="272" />
+  <line class="c" x1="900" y1="400" x2="985" y2="428" />
+  <line class="m" x1="1100" y1="100" x2="1175" y2="130" />
+  <line class="t" x1="1300" y1="360" x2="1395" y2="395" />
+  <line class="c" x1="1500" y1="500" x2="1580" y2="528" />
+  
+  <!-- Medium lines -->
+  <line class="l" x1="60" y1="1100" x2="260" y2="1150" />
+  <line class="r" x1="260" y1="1000" x2="440" y2="1045" />
+  <line class="m" x1="460" y1="1160" x2="610" y2="1200" />
+  <line class="t" x1="660" y1="1040" x2="880" y2="1095" />
+  <line class="c" x1="860" y1="1200" x2="1030" y2="1242" />
+  <line class="m" x1="1060" y1="960" x2="1250" y2="1010" />
+  
+  <!-- Wide viewport-spanning lines -->
+  <line class="m2" x1="-100" y1="600" x2="1100" y2="680" />
+  <line class="t2" x1="900" y1="700" x2="2100" y2="770" />
+  <line class="l" x1="-100" y1="1400" x2="1100" y2="1460" />
+  <line class="m" x1="900" y1="1500" x2="2100" y2="1570" />
+  <line class="r" x1="-50" y1="900" x2="1000" y2="960" />
+  <line class="c" x1="900" y1="1000" x2="2100" y2="1060" />
+  
+  <!-- Edge-extending lines -->
+  <line class="m2" x1="-160" y1="300" x2="800" y2="360" />
+  <line class="l" x1="1200" y1="400" x2="2160" y2="470" />
+  <line class="c" x1="-100" y1="1600" x2="1000" y2="1660" />
+  <line class="t" x1="1000" y1="1700" x2="2160" y2="1770" />
+  <line class="t2" x1="-60" y1="500" x2="900" y2="550" />
+  
+  <!-- Extra scattered -->
+  <line class="c" x1="160" y1="800" x2="270" y2="838" />
+  <line class="m" x1="1760" y1="900" x2="1870" y2="942" />
+  <line class="t" x1="360" y1="1700" x2="460" y2="1732" />
+  <line class="l" x1="1560" y1="1760" x2="1680" y2="1796" />
+  <line class="m2" x1="560" y1="700" x2="655" y2="735" />
+  <line class="t2" x1="1360" y1="640" x2="1465" y2="675" />
+  <line class="r" x1="760" y1="1500" x2="845" y2="1532" />
+  <line class="l" x1="1160" y1="1560" x2="1275" y2="1596" />
+</svg>

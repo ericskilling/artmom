@@ -1,0 +1,78 @@
+---
+interface Props {
+  currentPage?: string;
+}
+const { currentPage = 'home' } = Astro.props;
+
+const navItems = [
+  { label: 'Art Facilitation', href: '/facilitation', id: 'facilitation' },
+  { label: 'Online Classes', href: '/classes', id: 'classes' },
+  { label: 'Portfolio', href: '/portfolio', id: 'portfolio' },
+  { label: 'Exhibitions & CV', href: '/exhibitions', id: 'exhibitions' },
+  { label: 'News', href: '/news', id: 'news' },
+  { label: 'Contact', href: '/contact', id: 'contact' },
+];
+---
+
+<button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+  <span class="menu-toggle-bar"></span>
+  <span class="menu-toggle-bar"></span>
+  <span class="menu-toggle-bar"></span>
+</button>
+
+<aside class="sidebar" id="sidebar">
+  <div class="mb-12 w-full">
+    <a href="/" class="block font-montserrat uppercase no-underline w-full flex flex-col gap-1">
+      <span class="flex w-full text-[#FF1493] text-3xl font-black" style="display: flex; justify-content: space-between; width: 100%;">
+        <span>R</span><span>a</span><span>c</span><span>h</span><span>e</span><span>l</span><span>l</span><span>e</span>
+      </span>
+      <span class="flex w-full text-[#aaaaaa] text-5xl font-thin" style="display: flex; justify-content: space-between; width: 100%;">
+        <span>Y</span><span>m</span><span>a</span><span>y</span>
+      </span>
+      <span class="flex w-full text-[#FF8C00] text-3xl font-bold" style="display: flex; justify-content: space-between; width: 100%;">
+        <span>S</span><span>k</span><span>i</span><span>l</span><span>l</span><span>i</span><span>n</span><span>g</span>
+      </span>
+    </a>
+  </div>
+  
+  <nav class="flex-1">
+    <ul class="list-none flex flex-col gap-2">
+      {navItems.map(item => (
+        <li>
+          <a 
+            href={item.href} 
+            class={`block px-4 py-2.5 font-zalando text-sm text-royal-cobalt font-extrabold uppercase tracking-wider border-3 border-royal-cobalt relative mx-0 my-2 transition-all duration-100 before:content-[''] before:absolute before:-top-3 before:left-1/2 before:-translate-x-1/2 before:w-10 before:h-[3px] before:bg-vivid-tangerine hover:text-white hover:bg-royal-cobalt hover:-skew-x-[5deg] hover:shadow-[6px_6px_0_#FF1493] ${currentPage === item.id ? '!text-white !bg-royal-cobalt !border-[#FF1493] !shadow-[6px_6px_0_rgba(255,20,147,0.3)]' : ''}`}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+
+  <div class="pt-8 border-t-3 border-royal-cobalt font-montserrat text-sm text-royal-cobalt flex gap-2">
+    <a href="https://www.instagram.com/rachelle_ymay_skilling/" target="_blank" class="text-royal-cobalt hover:text-[#FF1493] transition-colors duration-200">Instagram</a>
+    <span class="text-gray-300">|</span>
+    <a href="mailto:Rachelleskilling@gmail.com" class="text-royal-cobalt hover:text-[#FF1493] transition-colors duration-200">Email</a>
+  </div>
+</aside>
+
+<script>
+  const toggle = document.getElementById('menuToggle');
+  const sidebar = document.getElementById('sidebar');
+
+  if (toggle && sidebar) {
+    toggle.addEventListener('click', () => {
+      const isOpen = sidebar.classList.toggle('sidebar--open');
+      toggle.setAttribute('aria-expanded', isOpen.toString());
+    });
+
+    // Close sidebar when clicking a nav link
+    sidebar.querySelectorAll('a[href]').forEach(link => {
+      link.addEventListener('click', () => {
+        sidebar.classList.remove('sidebar--open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+</script>
